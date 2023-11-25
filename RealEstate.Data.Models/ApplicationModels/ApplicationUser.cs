@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RealEstate.Data.Models.BaseDeletableModels;
+using RealEstate.Data.Models.DatabaseModels;
 
 namespace RealEstate.Data.Models.ApplicationModels
 {
@@ -11,6 +12,7 @@ namespace RealEstate.Data.Models.ApplicationModels
             this.Roles = new HashSet<IdentityUserRole<string>>();
             this.Claims = new HashSet<IdentityUserClaim<string>>();
             this.Logins = new HashSet<IdentityUserLogin<string>>();
+            this.Properties = new HashSet<Property>();
         }
 
         // Audit info
@@ -28,5 +30,7 @@ namespace RealEstate.Data.Models.ApplicationModels
         public virtual ICollection<IdentityUserClaim<string>> Claims { get; set; }
 
         public virtual ICollection<IdentityUserLogin<string>> Logins { get; set; }
+
+        public virtual ICollection<Property> Properties { get; set; }
     }
 }

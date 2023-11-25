@@ -19,10 +19,10 @@
 
   <ItemGroup>
     <Folder Include="Migrations\" />
-    <Folder Include="Seeding\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\RealEstate.Common\RealEstate.Common.csproj" />
     <ProjectReference Include="..\..\RealEstate.Data.Models\RealEstate.Data.Models.csproj" />
   </ItemGroup>
 

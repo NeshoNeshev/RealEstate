@@ -6,7 +6,7 @@ namespace RealEstate.Data.Models.DatabaseModels
     {
         public District()
         {
-            this.Properties = new HashSet<Property>();
+            this.PropertyTypes = new HashSet<PropertyType>();
         }
 
         public string? Name { get; set; }
@@ -15,6 +15,6 @@ namespace RealEstate.Data.Models.DatabaseModels
 
         public Town? Town { get; set; }
 
-        public virtual ICollection<Property> Properties { get; set; }
+        public virtual ICollection<PropertyType> PropertyTypes { get; set; }
     }
 }

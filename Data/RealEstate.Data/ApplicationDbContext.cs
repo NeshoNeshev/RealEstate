@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using RealEstate.Data.Models.ApplicationModels;
 using RealEstate.Data.Models.BaseDeletableModels;
+using RealEstate.Data.Models.DatabaseModels;
 using System.Reflection;
 
 namespace RealEstate.Data
@@ -23,7 +24,15 @@ namespace RealEstate.Data
         }
 
         //Database Models
-        //public DbSet<Demo> Demos { get; set; }
+        public DbSet<District> Districts { get; set; }
+
+        public DbSet<Property> Properties { get; set; }
+
+        public DbSet<PropertyType> PropertyTypes { get; set; }
+
+        public DbSet<Town> Towns { get; set; }
+
+        public DbSet<View> Views { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

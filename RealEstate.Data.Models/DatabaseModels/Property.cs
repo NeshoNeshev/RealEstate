@@ -7,7 +7,7 @@ namespace RealEstate.Data.Models.DatabaseModels
     {
         public Property()
         {
-
+            this.Views = new HashSet<View>();
         }
         public int Code { get; set; }
 
@@ -29,12 +29,20 @@ namespace RealEstate.Data.Models.DatabaseModels
 
         public Status Status { get; set; }
 
-        public string? DistrictId { get; set; }
+        public bool IsBuying { get; set; }
 
-        public District? District { get; set; }
+        public bool IsSolded { get; set; }
+
+        public bool IsRental { get; set; }
 
         public string PropertyTypeId { get; set; }
 
         public PropertyType PropertyType { get; set; }
+
+        public string? UserId { get; set; }
+
+        public ApplicationUser? ApplicationUser { get; set; }
+
+        public virtual ICollection<View> Views { get; set; }
     }
 }

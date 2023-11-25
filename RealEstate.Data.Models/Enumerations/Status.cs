@@ -2,8 +2,8 @@
 {
     public enum Status
     {
-        Kupi = 1,
-        Prodai =2,
-        Naemi =3,
+        Buy = 1,
+        Sold =2,
+        Rental =3,
     }
 }
