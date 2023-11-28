@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\RealEstate.Data\RealEstate.Data.csproj" />
+    <ProjectReference Include="..\..\RealEstate.Services.Mapping\RealEstate.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Web\RealEstate.Web\Shared\RealEstate.Web.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

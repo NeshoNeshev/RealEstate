@@ -12,6 +12,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{27E3910E-B667-4659-B42D-A7BEFCC34224}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Services", "Services\RealEstate.Services\RealEstate.Services.csproj", "{B2AB1512-1510-4E7D-9028-847A1FE49BF5}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F2DF9556-7EA6-487B-BC7F-C05E73C81D1A} = {F2DF9556-7EA6-487B-BC7F-C05E73C81D1A}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Services.Mapping", "RealEstate.Services.Mapping\RealEstate.Services.Mapping.csproj", "{F2DF9556-7EA6-487B-BC7F-C05E73C81D1A}"
 EndProject
@@ -21,11 +24,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Common", "RealEs
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{CE5C5A04-BAFB-469F-8500-5FE2FF2AAEF1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Web.Server", "Web\RealEstate.Web\Server\RealEstate.Web.Server.csproj", "{FFB699BD-C5E6-4AAD-B059-FC14B2E8933B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Web.Server", "Web\RealEstate.Web\Server\RealEstate.Web.Server.csproj", "{FFB699BD-C5E6-4AAD-B059-FC14B2E8933B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Web.Client", "Web\RealEstate.Web\Client\RealEstate.Web.Client.csproj", "{E293FAAC-FABA-456A-8F66-EDBD77836C34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Web.Client", "Web\RealEstate.Web\Client\RealEstate.Web.Client.csproj", "{E293FAAC-FABA-456A-8F66-EDBD77836C34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealEstate.Web.Shared", "Web\RealEstate.Web\Shared\RealEstate.Web.Shared.csproj", "{D04E4775-8E9F-4DFE-9C51-514EA51F7BC2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RealEstate.Web.Shared", "Web\RealEstate.Web\Shared\RealEstate.Web.Shared.csproj", "{D04E4775-8E9F-4DFE-9C51-514EA51F7BC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

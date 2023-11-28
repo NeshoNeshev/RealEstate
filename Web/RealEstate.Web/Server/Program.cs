@@ -10,6 +10,7 @@ using ApplicationDbContext = RealEstate.Data.ApplicationDbContext;
 using RealEstate.Services.Mapping;
 using RealEstate.Web.Shared;
 using System.Reflection;
+using RealEstate.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,14 +37,16 @@ builder.Services.AddIdentityServer()
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove(JwtClaimTypes.Role);
 
+
+
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
-
-
+builder.Services.AddTransient<ITownService, TownService>();
+builder.Services.AddTransient<IPropertyService, PropertyService>();
 
 
 var app = builder.Build();
