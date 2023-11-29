@@ -32,7 +32,7 @@ namespace RealEstate.Data
 
         public DbSet<Town> Towns { get; set; }
 
-        public DbSet<View> Views { get; set; }
+        public DbSet<PropertyInspection> PropertyInspections { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
 

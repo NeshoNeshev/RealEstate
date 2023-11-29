@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RealEstate.Data;
 using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Services.Mapping;
-using RealEstate.Web.Shared;
 using RealEstate.Web.Shared.PropertyModels;
 
 namespace RealEstate.Services
@@ -66,8 +64,31 @@ namespace RealEstate.Services
         public async Task<PropertyViewModel> Get(string properyId)
         {
             //todo: fill PropertyViewModel
-            var town = await this.dbContext.Properties.Where(x => x.Id == properyId).To<PropertyViewModel>().FirstOrDefaultAsync();
-            return town;
+            var proppery = await this.dbContext.Properties.Where(x => x.Id == properyId).To<PropertyViewModel>().FirstOrDefaultAsync();
+            return proppery;
+        }
+        public async Task Update(PropertyUpdateModel model)
+        {
+            var property = await this.dbContext.Properties.FirstOrDefaultAsync(x => x.Id == model.PropertyId);
+            if (property == null)
+            {
+                throw new InvalidOperationException($"Property with this id: {model.PropertyId} not exist");
+            }
+            property.Price = model.Price;
+            property.Area = model.Area;
+            property.Floor = model.Floor;
+            property.Heating = model.Heating;
+            property.FurnishedLevel = model.FurnishedLevel;
+            property.Description = model.Description;
+            property.IsBuying = model.IsBuying;
+            property.IsSolded = model.IsSolded;
+            property.IsRental = model.IsRental;
+            property.Statute = model.Statute;
+            property.Status = model.Status;
+            property.PropertyTypeId = model.PropertyTypeId;
+            this.dbContext.Properties.Update(property);
+            await this.dbContext.SaveChangesAsync();
+
         }
     }
 }

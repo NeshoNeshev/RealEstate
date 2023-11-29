@@ -47,7 +47,7 @@ builder.Services.AddRazorPages();
 
 builder.Services.AddTransient<ITownService, TownService>();
 builder.Services.AddTransient<IPropertyService, PropertyService>();
-
+builder.Services.AddTransient<IPropertyInspectionService, PropertyInspectionService>();
 
 var app = builder.Build();
 

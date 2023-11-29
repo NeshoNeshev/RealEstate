@@ -9,5 +9,7 @@ namespace RealEstate.Services
         public Task<bool> Delete(string properyId);
 
         public Task<PropertyViewModel> Get(string properyId);
+
+        public Task Update (PropertyUpdateModel model);
     }
 }

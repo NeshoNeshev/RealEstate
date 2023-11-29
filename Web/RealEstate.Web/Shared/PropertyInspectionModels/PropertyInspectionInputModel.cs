@@ -1,14 +1,7 @@
-﻿using RealEstate.Data.Models.ApplicationModels;
-
-namespace RealEstate.Data.Models.DatabaseModels
+﻿namespace RealEstate.Web.Shared.PropertyInspectionModels
 {
-    public class View : BaseDeletableModel<string>
+    public class PropertyInspectionInputModel
     {
-        public View()
-        {
-            
-        }
-
         public string? UserName { get; set; }
 
         public string? PhoneNumber { get; set; }
@@ -22,9 +15,5 @@ namespace RealEstate.Data.Models.DatabaseModels
         public string? Hour { get; set; }
 
         public string? PropertyId { get; set; }
-
-        public virtual Property? Property { get; set; }
-            
- 
     }
 }

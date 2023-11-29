@@ -7,27 +7,27 @@ namespace RealEstate.Data.Models.DatabaseModels
     {
         public Property()
         {
-            this.Views = new HashSet<View>();
+            this.Views = new HashSet<PropertyInspection>();
         }
-        public int Code { get; set; }
+        public int? Code { get; set; }
 
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
-        public double Area { get; set; }
+        public double? Area { get; set; }
 
-        public int Floor { get; set; }
+        public int? Floor { get; set; }
 
-        public string Heating { get; set; }
+        public string? Heating { get; set; }
 
-        public string FurnishedLevel { get; set; }
+        public string? FurnishedLevel { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
-        public int Seen { get; set; }
+        public int? Seen { get; set; }
 
-        public string Statute { get; set; }
+        public string? Statute { get; set; }
 
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         public bool IsBuying { get; set; }
 
@@ -35,14 +35,14 @@ namespace RealEstate.Data.Models.DatabaseModels
 
         public bool IsRental { get; set; }
 
-        public string PropertyTypeId { get; set; }
+        public string? PropertyTypeId { get; set; }
 
-        public PropertyType PropertyType { get; set; }
+        public PropertyType? PropertyType { get; set; }
 
         public string? UserId { get; set; }
 
         public ApplicationUser? ApplicationUser { get; set; }
 
-        public virtual ICollection<View> Views { get; set; }
+        public virtual ICollection<PropertyInspection> PropertyInspections { get; set; }
     }
 }
