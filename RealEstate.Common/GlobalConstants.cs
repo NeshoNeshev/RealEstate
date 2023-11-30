@@ -1,5 +1,6 @@
 ﻿namespace RealEstate.Common
 {
+    // тов са глобални константи които могат да се ползват навсякъде
     public static class GlobalConstants
     {
         public const string ApplicationName = "RealEstate";

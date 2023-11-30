@@ -2,6 +2,7 @@
 
 namespace RealEstate.Data
 {
+    // опции за паролата дали да съдържа или не примерно главни букви
     public static class IdentityOptionsProvider
     {
         public static void GetIdentityOptions(IdentityOptions options)

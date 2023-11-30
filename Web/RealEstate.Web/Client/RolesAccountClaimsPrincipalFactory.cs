@@ -5,6 +5,7 @@ using System.Text.Json;
 
 namespace RealEstate.Web.Client
 {
+    //клеймс приципи на юзерите и ролите съдържат се  в Asp.Users аутентикацията е дефолтната за asp.net core 
     public class RolesAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<RemoteUserAccount>
     {
         public RolesAccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor) : base(accessor) { }

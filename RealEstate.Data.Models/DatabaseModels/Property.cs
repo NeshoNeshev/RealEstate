@@ -3,11 +3,12 @@ using RealEstate.Data.Models.Enumerations;
 
 namespace RealEstate.Data.Models.DatabaseModels
 {
+    // таблица за базата данни
     public class Property : BaseDeletableModel<string>
     {
         public Property()
         {
-            this.Views = new HashSet<PropertyInspection>();
+            this.PropertyInspections = new HashSet<PropertyInspection>();
         }
         public int? Code { get; set; }
 

@@ -2,6 +2,7 @@
 
 namespace RealEstate.Data.Models.DatabaseModels
 {
+    // таблица за базата данни
     public class PropertyType : BaseDeletableModel<string>
     {
         public PropertyType()

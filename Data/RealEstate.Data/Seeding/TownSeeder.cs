@@ -2,6 +2,7 @@
 
 namespace RealEstate.Data.Seeding
 {
+    // сийдва градове в базата
     public class TownSeeder : ISeeder
     {
         public TownSeeder()
@@ -29,7 +30,7 @@ namespace RealEstate.Data.Seeding
 
 
             dbContext.Towns.AddRange(townsToadd);
-            dbContext.SaveChanges();
+           await dbContext.SaveChangesAsync();
         }
     }
 }

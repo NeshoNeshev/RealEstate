@@ -4,6 +4,7 @@ using RealEstate.Data.Models.DatabaseModels;
 
 namespace RealEstate.Data.Models.ApplicationModels
 {
+    // разширява дефолтните юзери
     public class ApplicationUser : IdentityUser, IDateInfo, IDeletable
     {
         public ApplicationUser()

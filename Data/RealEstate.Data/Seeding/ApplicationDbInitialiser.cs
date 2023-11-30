@@ -4,13 +4,16 @@ using RealEstate.Data.Models.ApplicationModels;
 
 namespace RealEstate.Data.Seeding
 {
+    // вкарва предварителни данни в базата свурзани с  потребител и роля
     public static class ApplicationDbInitialiser
     {
+        //вкарва ролите в базата
         public static void SeedRoles(RoleManager<IdentityRole> roleManager)
         {
             AddRoles(roleManager, GlobalConstants.AdministratorRoleName);
             AddRoles(roleManager, GlobalConstants.ModeratorRoleName);
         }
+        // вкарва потребителите в базата и ги вкарва в роля
         public static void SeedUsers(UserManager<ApplicationUser> userManager)
         {
             (string name, string password, string role)[] demoUsers = new[]
@@ -27,6 +30,7 @@ namespace RealEstate.Data.Seeding
 
         }
 
+        //скрит метод за потребителите 
         private static void AddUsers(UserManager<ApplicationUser> userManager, (string name, string password, string role) demoUser)
         {
             ApplicationUser user = userManager.FindByNameAsync(demoUser.name).Result;
@@ -52,6 +56,7 @@ namespace RealEstate.Data.Seeding
 
             }
         }
+        //скрит метод за ролите
         private static void AddRoles(RoleManager<IdentityRole> roleManager, string roleName)
         {
             if (roleManager.FindByNameAsync(roleName).Result == default)

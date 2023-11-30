@@ -3,6 +3,7 @@ using RealEstate.Data.Models.BaseDeletableModels;
 
 namespace RealEstate.Data
 {
+    // индекси за това което е изтрито да не се трие наистина
     internal static class IndexesConfiguration
     {
         public static void Configure(ModelBuilder modelBuilder)

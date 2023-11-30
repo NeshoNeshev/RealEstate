@@ -4,6 +4,8 @@ using RealEstate.Web.Shared;
 
 namespace RealEstate.Web.Server.Controllers
 {
+    // това е примерен контролер в който се получават данни от фронтенда с http заявки викат сървиси в конструктора които
+    // валидират, предават и записват данни в базата
     [Authorize]
     [ApiController]
     [Route("[controller]")]

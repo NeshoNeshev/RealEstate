@@ -9,6 +9,7 @@ using System.Reflection;
 
 namespace RealEstate.Data
 {
+    //основен клас който отговаря за базата данни
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
@@ -16,14 +17,14 @@ namespace RealEstate.Data
                nameof(SetIsDeletedQueryFilter),
                BindingFlags.NonPublic | BindingFlags.Static);
 
-
+        //конструктор
         public ApplicationDbContext(
            DbContextOptions options,
            IOptions<OperationalStoreOptions> operationalStoreOptions) : base(options, operationalStoreOptions)
         {
         }
 
-        //Database Models
+        //това са таблиците които се записват в базата до ///
         public DbSet<District> Districts { get; set; }
 
         public DbSet<Property> Properties { get; set; }
@@ -33,7 +34,7 @@ namespace RealEstate.Data
         public DbSet<Town> Towns { get; set; }
 
         public DbSet<PropertyInspection> PropertyInspections { get; set; }
-
+        ///
         public override int SaveChanges() => this.SaveChanges(true);
 
         public override int SaveChanges(bool acceptAllChangesOnSuccess)
@@ -52,6 +53,8 @@ namespace RealEstate.Data
             this.ApplyAuditInfoRules();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
+
+        //конфигурира изтриването и т.нт
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Needed for Identity models configuration
@@ -86,7 +89,7 @@ namespace RealEstate.Data
         {
             builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
-
+        // конфигурира специфични връзки между таблиците в базата в случая юзери и роли едно към много
         private static void ConfigureUserIdentityRelations(ModelBuilder builder)
         {
             builder.Entity<ApplicationUser>()
@@ -111,6 +114,7 @@ namespace RealEstate.Data
                 .OnDelete(DeleteBehavior.Restrict);
         }
 
+        // слага на всички таблици кога са създадени или модифицирани
         private void ApplyAuditInfoRules()
         {
             var changedEntries = this.ChangeTracker

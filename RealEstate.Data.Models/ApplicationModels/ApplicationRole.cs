@@ -3,6 +3,7 @@ using RealEstate.Data.Models.BaseDeletableModels;
 
 namespace RealEstate.Data.Models.ApplicationModels
 {
+    // разширява дефолтните ролите
     public class ApplicationRole : IdentityRole, IDateInfo, IDeletable
     {
         public ApplicationRole()

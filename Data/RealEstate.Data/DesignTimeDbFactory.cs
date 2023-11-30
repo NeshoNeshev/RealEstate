@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 
 namespace RealEstate.Data
 {
+    // точно каквото значи името "DesignTimeDbFactory" за базата данни
     public class DesignTimeDbFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
     {
         public ApplicationDbContext CreateDbContext(string[] args)

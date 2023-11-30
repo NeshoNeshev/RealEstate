@@ -5,6 +5,7 @@ using RealEstate.Services.Mapping;
 
 namespace RealEstate.Web.Shared.PropertyModels
 {
+    // това е модел за цруд операция ориентирай се по имената input e за записване в базата а view за фронтенда
     public class PropertyViewModel : IMapFrom<Property>
     {
         public int Code { get; set; }

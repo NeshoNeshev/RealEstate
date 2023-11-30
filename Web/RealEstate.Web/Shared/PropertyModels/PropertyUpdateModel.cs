@@ -2,6 +2,7 @@
 
 namespace RealEstate.Web.Shared.PropertyModels
 {
+    // това е модел за цруд операция ориентирай се по имената Update e за Update на таблицата в базата а view за фронтенда
     public class PropertyUpdateModel
     {
         public string? PropertyId { get; set; }

@@ -1,5 +1,6 @@
 ﻿namespace RealEstate.Web.Shared.PropertyInspectionModels
 {
+    // това е модел за цруд операция ориентирай се по имената input e за записване в базата а view за фронтенда
     public class PropertyInspectionInputModel
     {
         public string? UserName { get; set; }
