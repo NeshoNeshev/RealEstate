@@ -5,6 +5,6 @@ namespace RealEstate.Web.Shared.DistrictModels
 {
     public class DistrictViewModel : IMapFrom<District>
     {
-        public string? Name { get; set; };
+        public string? Name { get; set; }
     }
 }

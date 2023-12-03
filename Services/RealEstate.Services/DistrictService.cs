@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Components.Web;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using RealEstate.Data;
 using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Services.Mapping;
-using RealEstate.Web.Shared;
 using RealEstate.Web.Shared.DistrictModels;
 
 namespace RealEstate.Services
