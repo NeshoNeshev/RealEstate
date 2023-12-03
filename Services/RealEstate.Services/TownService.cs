@@ -20,6 +20,16 @@ namespace RealEstate.Services
             var town = await this.dbContext.Towns.Where(x => x.Id == townId).To<TownViewModel>().FirstOrDefaultAsync();
             return town;
         }
+        public async Task<string> GetTownId(string id)
+        {
+
+            var town = await this.dbContext.Towns.FirstOrDefaultAsync(x => x.Id == id);
+            if (town == null)
+            {
+                throw new InvalidOperationException($"Град с това id: {id}  не съществува>");
+            }
+            return town.Id;
+        }
         public async Task<string> Create(string name)
         {
             var existedTown = await this.dbContext.Towns.AnyAsync(x => x.Name == name);

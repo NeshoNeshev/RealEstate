@@ -10,7 +10,7 @@ namespace RealEstate.Data.Models.DatabaseModels
         {
             this.PropertyInspections = new HashSet<PropertyInspection>();
         }
-        public int? Code { get; set; }
+        public string? Code { get; set; }
 
         public double? Price { get; set; }
 

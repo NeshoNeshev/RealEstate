@@ -3,29 +3,34 @@ using RealEstate.Data;
 using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Services.Mapping;
 using RealEstate.Web.Shared.PropertyModels;
+using static Nito.HashAlgorithms.CRC32;
 
 namespace RealEstate.Services
 {
     public class PropertyService : IPropertyService
     {
+        private readonly IPropertyTypeService propertyTypeService;
         private readonly ApplicationDbContext dbContext;
 
-        public PropertyService(ApplicationDbContext dbContext)
+        public PropertyService(IPropertyTypeService propertyTypeService,ApplicationDbContext dbContext)
         {
+            this.propertyTypeService = propertyTypeService;
             this.dbContext = dbContext;
         }
-
+        
         public async Task<string> Create(PropertyInputModel model)
         {
+            var propertyType = this.propertyTypeService.Get(model.PropertyTypeId);
             var user = await this.dbContext.Users.FirstOrDefaultAsync(x => x.Id == model.UserId);
-            if (user == null)
+            if (user == null || propertyType == null)
             {
-                return "This user not exist";
+                throw new InvalidOperationException("Имотът не  може да бъде създаден"); ;
             }
+            var id = Guid.NewGuid().ToString();
             var property = new Property()
             {
-                Id = Guid.NewGuid().ToString(),
-                Code = model.Code,
+                Id = id,
+                Code = Crc(id),
                 Price = model.Price,
                 Area = model.Area,
                 Floor = model.Floor,
@@ -39,7 +44,7 @@ namespace RealEstate.Services
                 IsSolded = false,
                 IsRental = false,
                 UserId = user.Id,
-                //add to ProperyType
+                PropertyTypeId = model.PropertyTypeId,
             };
             await this.dbContext.Properties.AddAsync(property);
             await this.dbContext.SaveChangesAsync();
@@ -88,7 +93,24 @@ namespace RealEstate.Services
             property.PropertyTypeId = model.PropertyTypeId;
             this.dbContext.Properties.Update(property);
             await this.dbContext.SaveChangesAsync();
+        }
+        private string Crc(string text)
+        {
+            var definition = new Definition
+            {
+                Initializer = 0xFFFFFFFF,
+                TruncatedPolynomial = 0x04C11DB7,
+                FinalXorValue = 0x00000000,
+                ReverseResultBeforeFinalXor = true,
+                ReverseDataBytes = true
+            };
+            var input = Convert.FromHexString(text);
+            var whow = new Nito.HashAlgorithms.CRC32(definition);
 
+            var crc32 = whow.ComputeHash(input);
+            var crc32Hex = Convert.ToHexString(crc32);
+
+            return crc32Hex;
         }
     }
 }

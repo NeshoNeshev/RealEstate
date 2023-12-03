@@ -2,6 +2,7 @@
 using RealEstate.Data;
 using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Web.Shared.PropertyInspectionModels;
+using RealEstate.Services.Mapping;
 
 namespace RealEstate.Services
 {
@@ -89,6 +90,12 @@ namespace RealEstate.Services
             this.dbContext.PropertyInspections.Update(propertyInspection);
             await this.dbContext.SaveChangesAsync();
             return propertyInspection.Id;
+        }
+        public async Task<PropertyInspectionViewModel> Get(string id)
+        {
+            var propertyInspection = await this.dbContext.PropertyInspections.Where(x => x.Id == id).To<PropertyInspectionViewModel>().FirstOrDefaultAsync();
+
+            return propertyInspection;
         }
     }
 }

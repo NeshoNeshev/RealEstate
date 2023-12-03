@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Nito.HashAlgorithms.CRC" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Data\RealEstate.Data\RealEstate.Data.csproj" />
     <ProjectReference Include="..\..\RealEstate.Services.Mapping\RealEstate.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Web\RealEstate.Web\Shared\RealEstate.Web.Shared.csproj" />

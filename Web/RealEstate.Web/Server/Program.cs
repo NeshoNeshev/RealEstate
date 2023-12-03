@@ -57,7 +57,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddTransient<ITownService, TownService>();
 builder.Services.AddTransient<IPropertyService, PropertyService>();
 builder.Services.AddTransient<IPropertyInspectionService, PropertyInspectionService>();
-
+builder.Services.AddTransient<IDistrictService, DistrictService>();
+builder.Services.AddTransient<IPropertyTypeService, PropertyTypeService>();
 // тук се билдва аппа
 var app = builder.Build();
 

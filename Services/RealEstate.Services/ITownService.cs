@@ -4,6 +4,7 @@ namespace RealEstate.Services
 {
     public interface ITownService
     {
+        public Task<string> GetTownId(string id);
         public Task<TownViewModel> GetTown(string townId);
 
         public Task<string> Create(string name);
