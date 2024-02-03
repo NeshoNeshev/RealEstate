@@ -19,5 +19,5 @@ builder.Services.AddHttpClient("RealEstate.Web.ServerAPI",
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("RealEstate.Web.ServerAPI"));
 builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(RolesAccountClaimsPrincipalFactory));
 builder.Services.AddApiAuthorization();
-
+builder.Services.AddBlazorBootstrap();
 await builder.Build().RunAsync();

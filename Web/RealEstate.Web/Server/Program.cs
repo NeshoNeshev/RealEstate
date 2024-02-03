@@ -87,7 +87,8 @@ using (var serviceScope = app.Services.CreateScope())
     // взимат роля и юзер мениджърите които са дефолтни за asp.net core
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
+    ApplicationDbInitialiser.SeedTowns(dbContext, serviceProvider);
+    ApplicationDbInitialiser.SeedTipes(dbContext, serviceProvider);
     // сиидва юзерите и ролите
     ApplicationDbInitialiser.SeedRoles(roleManager);
     ApplicationDbInitialiser.SeedUsers(userManager);

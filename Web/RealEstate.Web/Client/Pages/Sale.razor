@@ -1,0 +1,66 @@
+﻿@page "/sale"
+
+<div class="container-xxl py-5">
+    
+    <div class="container">
+        <h1 class="display-5 animated fadeIn mb-4">
+            Продажби на апартаменти, жилища и имоти в София, Бели брези от Addresimo
+        </h1>
+        <div class="row g-2">
+
+            <div class="col-md-3">
+                <span style="color: #212529"> Град</span>
+                <select class="form-select border-0 py-3">
+                    <option selected>Property Type</option>
+                    <option value="1">Property Type 1</option>
+                    <option value="2">Property Type 2</option>
+                    <option value="3">Property Type 3</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span style="color: #212529"> Квартал</span>
+                <select class="form-select border-0 py-3">
+                    <option selected>Property Type</option>
+                    <option value="1">Property Type 1</option>
+                    <option value="2">Property Type 2</option>
+                    <option value="3">Property Type 3</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <span style="color: #212529"> Тип</span>
+                <select class="form-select border-0 py-3">
+                    <option selected>Property Type</option>
+                    <option value="1">Property Type 1</option>
+                    <option value="2">Property Type 2</option>
+                    <option value="3">Property Type 3</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-dark border-0 w-100 py-3">Намери</button>
+            </div>
+        </div>
+    
+        <div class="row g-4" style="margin-top: 10px">
+            <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-1.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+            </RealEstate.Web.Client.Components.Property>
+            <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-2.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+            </RealEstate.Web.Client.Components.Property>
+            <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-3.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+            </RealEstate.Web.Client.Components.Property>
+            <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-4.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+            </RealEstate.Web.Client.Components.Property>
+            <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-5.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+            </RealEstate.Web.Client.Components.Property>
+            <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-6.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+            </RealEstate.Web.Client.Components.Property>
+
+            <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                <a class="btn btn-primary py-3 px-5" href="">Виж повече имоти</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

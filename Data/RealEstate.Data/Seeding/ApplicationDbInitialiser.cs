@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RealEstate.Common;
 using RealEstate.Data.Models.ApplicationModels;
+using RealEstate.Data.Models.DatabaseModels;
 
 namespace RealEstate.Data.Seeding
 {
@@ -29,7 +31,48 @@ namespace RealEstate.Data.Seeding
             }
 
         }
+        public static async Task SeedTowns(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
+        {
+            if (dbContext.Towns.Any())
+            {
+                return;
+            }
+            var towns = new List<string>()
+            {
+            "София", "Варна" , "Пловдив" , "Бургас" , "Благоевград" ,  "Велико Търново", "Видин", "Враца" , "Габрово" ,  "Добрич" ,  "Кърджали" ,  "Кюстендил" ,
+             "Ловеч" , "Монтана" ,  "Пазарджик" ,  "Перник" ,  "Плевен" ,"Разград" , "Русе" , "Силистра", "Сливен",
+            "Смолян" ,  "Стара Загора","Търговище", "Хасково","Шумен", "Ямбол"
+            };
+            var townsToadd = new List<Town>();
+            foreach (var item in towns)
+            {
+                townsToadd.Add(new Town() {Id= Guid.NewGuid().ToString(), Name = item });
+            }
 
+
+            dbContext.Towns.AddRange(townsToadd);
+            await dbContext.SaveChangesAsync();
+        }
+        public static async Task SeedTipes(ApplicationDbContext dbContext, IServiceProvider serviceProvider)
+        {
+            if (dbContext.PropertyTypes.Any())
+            {
+                return;
+            }
+            var propType = new List<string>()
+            {
+            "Едностаен апартамент", "Двустаен апартамент" , "Тристаен апартамент" , "Мезонет" , "Къща" ,  "Магазин",
+            };
+            var types = new List<PropertyType>();
+            foreach (var item in propType)
+            {
+                types.Add(new PropertyType() { Id = Guid.NewGuid().ToString(), Name = item });
+            }
+
+
+            dbContext.PropertyTypes.AddRange(types);
+            await dbContext.SaveChangesAsync();
+        }
         //скрит метод за потребителите 
         private static void AddUsers(UserManager<ApplicationUser> userManager, (string name, string password, string role) demoUser)
         {
