@@ -1,0 +1,28 @@
+﻿@page "/administration"
+@using Microsoft.AspNetCore.Authorization
+@inject NavigationManager navigationManager
+
+<AuthorizeView Roles="Administrator">
+    <Authorized>
+        <div class="container-xxl bg-white p-0">
+            <h3>Administration</h3>
+        </div>
+       
+    </Authorized>
+    <NotAuthorized>
+        <div class="container-xxl bg-white p-0">
+
+            <div class="container-xxl py-5">
+                <div class="row g-5 align-items-center">
+                    <h1>Not authorize</h1>
+                </div>
+            </div>
+        </div>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+
+@code {
+
+}

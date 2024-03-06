@@ -1,4 +1,6 @@
-﻿<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
+﻿@using Microsoft.AspNetCore.Authorization
+
+<nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
     <a href="" class="navbar-brand d-flex align-items-center text-center">
         <div class="icon p-2 me-2">
             <img class="img-fluid" src="img/icon-deal.png" alt="Icon" style="width: 30px; height: 30px;">
@@ -24,8 +26,24 @@
             <NavLink class="nav-link" href="/Contact" Match="NavLinkMatch.All">
                 Контакти
             </NavLink>
+            <AuthorizeView Roles="Administrator">
+                <Authorized>
+                    <NavLink class="nav-link" href="/Administration" Match="NavLinkMatch.All">
+                        Администрация
+                    </NavLink>
+                    <NavLink class="nav-link" href="/Contact" Match="NavLinkMatch.All">
+                        Контакти
+                    </NavLink>
+                </Authorized>
+               
+            </AuthorizeView>
             <LoginDisplay />
         </div>
       
     </div>
 </nav>
+@code {
+
+    private bool expandSubNav;
+
+}

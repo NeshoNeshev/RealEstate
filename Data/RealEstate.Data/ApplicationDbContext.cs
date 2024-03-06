@@ -24,7 +24,7 @@ namespace RealEstate.Data
         {
         }
 
-        //това са таблиците които се записват в базата до ///
+        //това са таблиците които се записват в базата използва data.models ///
         public DbSet<District> Districts { get; set; }
 
         public DbSet<Property> Properties { get; set; }

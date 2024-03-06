@@ -46,20 +46,21 @@
                         </span>
                     </div>
                     <div class="row g-4">
-                        <h6>Какво получаваш с Адрес?</h6>
+                      
 
                         <div class="col-lg-6">
+                              <h6>Какво получаваш с Адрес?</h6>
                             <div class="row">
-                                <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                                    <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="card" style="border: 1px dashed rgba(0, 185, 142, .3)">
                                         <div class="card-body">
                                             <h6>Спечели повече пари</h6>
                                             <span>Ще получаваш сравнителен пазарен анализ, за да се ориентираш в цените на имотите в твоя район. Заедно ще определим твоята цена и така ще продадеш с по-добра печалба.</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.1s" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
-                                    <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
+                                <div class="col-md-6 col-sm-6 ">
+                                    <div class="card" style="border: 1px dashed rgba(0, 185, 142, .3)">
                                         <div class="card-body">
                                             <h6>Продай по-бързо</h6>
                                             <span>
@@ -70,8 +71,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.1s" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
-                                    <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
+                                <div class="col-md-6 col-sm-6 ">
+                                    <div class="card" style="border: 1px dashed rgba(0, 185, 142, .3)">
                                         <div class="card-body">
                                             <h6>Спечели повече свободно време</h6>
                                             <span>
@@ -80,8 +81,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6 col-sm-6 wow fadeInUp" data-wow-delay="0.1s" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
-                                    <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="card" style="border: 1px dashed rgba(0, 185, 142, .3)">
                                         <div class="card-body">
                                             <h6>Бъди спокоен и сигурен, че няма да сгрешиш</h6>
                                             <span>
@@ -94,68 +95,67 @@
 
 
                         </div>
-                        <div class="col-lg-4">
+              
+                        <div class="col-lg-6">
+                                      <h6>
+                            Попълнете формата или се свържете с нас на
+                            0888 11 22 00
+                        </h6>
                             <EditForm EditContext="@_editContext" OnValidSubmit="HandleOnValidSubmit">
                                 <DataAnnotationsValidator />
-                                <div class="form-group row mb-3">
-                                    <label for="name">Град:</label>
-                                    <div class="col-md-10">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                        <label for="name">Град:</label>
                                         <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" Placeholder="Address" />
                                         <ValidationMessage For="@(() => customerAddress.Address)" />
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Квартал:</label>
-                                    <div class="col-md-10">
+                                    </div>                                   
+                                   <div class="col-md-6">
+                                        <label for="name">Квартал:</label>
                                         <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
                                         <ValidationMessage For="@(() => customerAddress.Address)" />
                                     </div>
                                 </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Тип имот:</label>
-                                    <div class="col-md-10">
+                                <div class="form-group row">
+                                    <div class="col-md-6">
+                                         <label for="name">Тип имот:</label>
+                                       <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="name">Телефон:</label>
                                         <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
                                         <ValidationMessage For="@(() => customerAddress.Address)" />
                                     </div>
                                 </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Площ:</label>
-                                    <div class="col-md-10">
+
+                                <div class="form-group row">
+                                   <div class="col-md-6">
+                                        <label for="name">Желана цена:</label>
+                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                         <label for="name">Площ:</label>
                                         <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
                                         <ValidationMessage For="@(() => customerAddress.Address)" />
                                     </div>
                                 </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Желана цена:</label>
-                                    <div class="col-md-10">
+                              
+                                <div class="form-group row ">
+                                    <div class="col-md-6">
+                                        <label for="name">Имейл:</label>
                                         <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
                                         <ValidationMessage For="@(() => customerAddress.Address)" />
                                     </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Име:</label>
-                                    <div class="col-md-10">
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Имейл:</label>
-                                    <div class="col-md-10">
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
-                                    </div>
-                                </div>
-                                <div class="form-group row mb-3">
-                                    <label for="name">Телефон:</label>
-                                    <div class="col-md-10">
+                                    <div class="col-md-6">
+                                         <label for="name">Име:</label>
                                         <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
                                         <ValidationMessage For="@(() => customerAddress.Address)" />
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-12 text-right">
-                                        <button type="submit" class="btn btn-success float-right">Submit</button>
+                                    <div class="col-md-12 text-right" style="margin-top:20px;">
+                                        <button type="submit" class="btn btn-success float-right btn-lg">Submit</button>
                                     </div>
                                 </div>
                             </EditForm>
@@ -176,7 +176,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-sm-6">
-                            <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
+                            <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; border: 1px dashed rgba(0, 185, 142, .3)">
                                 <div class="card-body">
                                     <p>“Бях пуснала обява за продажба и ми се обади консултант на Адрес. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Адрес."</p>
                                     <p style="font-weight: bold;">
