@@ -36,6 +36,10 @@ namespace RealEstate.Data.Models.DatabaseModels
 
         public bool IsRental { get; set; }
 
+        public string? DistrictId { get; set; }
+
+        public District? District { get; set; }
+
         public string? PropertyTypeId { get; set; }
 
         public PropertyType? PropertyType { get; set; }

@@ -14,7 +14,8 @@ builder.Services.AddHttpClient("RealEstate.Web.ServerAPI", client => client.Base
 
 builder.Services.AddHttpClient("RealEstate.Web.ServerAPI",
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
-
+builder.Services.AddHttpClient("RealEstate.Web.ServerAPI.NoAuthenticationClient",
+    client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 // Supply HttpClient instances that include access tokens when making requests to the server project
 builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("RealEstate.Web.ServerAPI"));
 builder.Services.AddScoped(typeof(AccountClaimsPrincipalFactory<RemoteUserAccount>), typeof(RolesAccountClaimsPrincipalFactory));

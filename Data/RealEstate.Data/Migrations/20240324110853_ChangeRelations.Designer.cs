@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Data;
 
@@ -11,9 +12,10 @@ using RealEstate.Data;
 namespace RealEstate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240324110853_ChangeRelations")]
+    partial class ChangeRelations
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -430,9 +432,6 @@ namespace RealEstate.Data.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DistrictId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int?>("Floor")
                         .HasColumnType("int");
 
@@ -478,8 +477,6 @@ namespace RealEstate.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("DistrictId");
 
                     b.HasIndex("IsDeleted");
 
@@ -546,6 +543,9 @@ namespace RealEstate.Data.Migrations
                     b.Property<DateTime?>("DeletedOn")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("DistrictId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -556,6 +556,8 @@ namespace RealEstate.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DistrictId");
 
                     b.HasIndex("IsDeleted");
 
@@ -655,17 +657,11 @@ namespace RealEstate.Data.Migrations
                         .WithMany("Properties")
                         .HasForeignKey("ApplicationUserId");
 
-                    b.HasOne("RealEstate.Data.Models.DatabaseModels.District", "District")
-                        .WithMany("Propertys")
-                        .HasForeignKey("DistrictId");
-
                     b.HasOne("RealEstate.Data.Models.DatabaseModels.PropertyType", "PropertyType")
                         .WithMany("Properties")
                         .HasForeignKey("PropertyTypeId");
 
                     b.Navigation("ApplicationUser");
-
-                    b.Navigation("District");
 
                     b.Navigation("PropertyType");
                 });
@@ -677,6 +673,15 @@ namespace RealEstate.Data.Migrations
                         .HasForeignKey("PropertyId");
 
                     b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.PropertyType", b =>
+                {
+                    b.HasOne("RealEstate.Data.Models.DatabaseModels.District", "District")
+                        .WithMany("PropertyTypes")
+                        .HasForeignKey("DistrictId");
+
+                    b.Navigation("District");
                 });
 
             modelBuilder.Entity("RealEstate.Data.Models.ApplicationModels.ApplicationUser", b =>
@@ -692,7 +697,7 @@ namespace RealEstate.Data.Migrations
 
             modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.District", b =>
                 {
-                    b.Navigation("Propertys");
+                    b.Navigation("PropertyTypes");
                 });
 
             modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.Property", b =>

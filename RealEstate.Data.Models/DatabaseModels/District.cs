@@ -7,7 +7,7 @@ namespace RealEstate.Data.Models.DatabaseModels
     {
         public District()
         {
-            this.PropertyTypes = new HashSet<PropertyType>();
+            this.Propertys = new HashSet<Property>();
         }
 
         public string? Name { get; set; }
@@ -17,6 +17,6 @@ namespace RealEstate.Data.Models.DatabaseModels
 
         public Town? Town { get; set; }
         // връзка към таблица в базата прави,че в един квартал може да има много типове имоти
-        public virtual ICollection<PropertyType> PropertyTypes { get; set; }
+        public virtual ICollection<Property> Propertys { get; set; }
     }
 }

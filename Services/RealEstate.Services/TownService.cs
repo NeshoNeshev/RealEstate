@@ -15,6 +15,21 @@ namespace RealEstate.Services
         {
             this.dbContext = dbContext;
         }
+
+        public async Task<IEnumerable<T>> GetAll<T>(int? count = null, bool orderByDesc = false)
+        {
+            IQueryable<Town> query = this.dbContext.Towns.Where(x => x.IsDeleted == false);
+            if (count.HasValue)
+            {
+                query = query.Take(count.Value);
+            }
+            if (!orderByDesc)
+            {
+                query = query.OrderBy(x=>x.Name);
+            }
+            var result = await query.To<T>().ToListAsync();
+            return result;
+        }
         public async Task<TownViewModel> GetTown(string townId)
         {
             var town = await this.dbContext.Towns.Where(x => x.Id == townId).To<TownViewModel>().FirstOrDefaultAsync();

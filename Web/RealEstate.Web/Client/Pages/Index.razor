@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using RealEstate.Web.Shared
+@using RealEstate.Web.Shared.ViewModels
 
 <PageTitle>Index</PageTitle>
 
@@ -27,78 +29,72 @@
     <!-- Search Start -->
     <div class="container-fluid bg-primary mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px;">
         <div class="container">
+
             <div class="row g-2">
                 <div class="col-md-10">
                     <div class="row g-2">
                         <div class="col-md-3">
                             <span style="color: white">ID на имота</span>
-                            <input type="text" class="form-control border-0 py-3" placeholder="ID на имота">
+                            <input type="text" class="form-control border-0 py-3" placeholder="ID на имота"  @bind="@inputModel.propertyId">
                         </div>
                         <div class="col-md-3">
                             <span style="color: white"> Град</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
+                            <select class="form-select border-0 py-3" @onchange="SelectionChanged" value="@inputModel.selectedTown">
+                                <option disabled selected value="">Изберете град</option>
+                                @foreach (var town in indexModel?.Towns)
+                                {
+                                    <option value="@town.Id">@town.Name</option>
+                                }
                             </select>
                         </div>
                         <div class="col-md-3">
                             <span style="color: white"> Квартал</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
+                            <select class="form-select border-0 py-3" @bind="@inputModel.selectedDistrictId">
+                                <option selected disabled>Изберете квартал</option>
+                                @foreach (var district in districts)
+                                {
+                                    <option value="@district.Id">@district.Name</option>
+                                }
                             </select>
                         </div>
-                         <div class="col-md-3">
+                        <div class="col-md-3">
                             <span style="color: white"> Тип</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
+                           <select class="form-select border-0 py-3" @bind="@inputModel.selectedTypeId">
+                                <option selected disabled>Тип имот</option>
+                                @foreach (var type in indexModel.Types)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
                             </select>
                         </div>
                     </div>
                     <div class="row g-2">
-                       
+
                         <div class="col-md-3">
                             <span style="color: white"> Отопление</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
+                            <select class="form-select border-0 py-3"  @bind="@inputModel.heating">
+                                 @foreach (var heating in heatings)
+                                {
+                                    <option value="@heating">@heating</option>
+                                }
                             </select>
                         </div>
                         <div class="col-md-3">
                             <span style="color: white"> Обзавеждане</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
-                            </select>
-                        </div>
-                          <div class="col-md-3">
-                            <span style="color: white"> Площ от</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
+                            <select class="form-select border-0 py-3" @bind="@inputModel.furnitureLevel">
+                                @foreach (var level in furnitureLevel)
+                                {
+                                    <option value="@level">@level</option>
+                                }
                             </select>
                         </div>
                         <div class="col-md-3">
+                            <span style="color: white"> Площ от</span>
+                             <input type="text" class="form-control border-0 py-3" placeholder="ID на имота"  @bind="@inputModel.from">
+                        </div>
+                        <div class="col-md-3">
                             <span style="color: white"> Площ до</span>
-                            <select class="form-select border-0 py-3">
-                                <option selected>Property Type</option>
-                                <option value="1">Property Type 1</option>
-                                <option value="2">Property Type 2</option>
-                                <option value="3">Property Type 3</option>
-                            </select>
+                            <input type="text" class="form-control border-0 py-3" placeholder="ID на имота"  @bind="@inputModel.to">
                         </div>
                     </div>
                 </div>
@@ -120,12 +116,12 @@
                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-apartment.png" Type="Едностаен апартамент" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-villa.png" Type="Вила" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-house.png" Type="Апартамент" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-housing.png" Type="Офис" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
+                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-housing.png" Type="Офис" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-building.png" Type="Building" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-neighborhood.png" Type="Townhouse" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
                 <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-condominium.png" Type="Shop" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-               <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-luxury.png" Type="Garage" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-               
+                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-luxury.png" Type="Garage" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
+
             </div>
         </div>
     </div>
@@ -166,25 +162,19 @@
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
-                        <RealEstate.Web.Client.Components.Property 
-                        Town="Бургас" Price="12,111 euro" ImgUrl="img/property-1.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                            </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property 
-                        Town="Бургас" Price="12,111 euro" ImgUrl="img/property-2.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                            </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property 
-                        Town="Бургас" Price="12,111 euro" ImgUrl="img/property-3.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                            </RealEstate.Web.Client.Components.Property>
-                         <RealEstate.Web.Client.Components.Property 
-                        Town="Бургас" Price="12,111 euro" ImgUrl="img/property-4.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                            </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property 
-                        Town="Бургас" Price="12,111 euro" ImgUrl="img/property-5.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                            </RealEstate.Web.Client.Components.Property>
-                         <RealEstate.Web.Client.Components.Property 
-                        Town="Бургас" Price="12,111 euro" ImgUrl="img/property-6.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                            </RealEstate.Web.Client.Components.Property>
-                        
+                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-1.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+                        </RealEstate.Web.Client.Components.Property>
+                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-2.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+                        </RealEstate.Web.Client.Components.Property>
+                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-3.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+                        </RealEstate.Web.Client.Components.Property>
+                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-4.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+                        </RealEstate.Web.Client.Components.Property>
+                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-5.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+                        </RealEstate.Web.Client.Components.Property>
+                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-6.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
+                        </RealEstate.Web.Client.Components.Property>
+
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                             <a class="btn btn-primary py-3 px-5" href="/sale">Виж повече имоти</a>
                         </div>
@@ -451,7 +441,7 @@
                                 <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
                             </div>
                             <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Обадете се</a>
-                           
+
                         </div>
                     </div>
                 </div>
@@ -525,3 +515,7 @@
     </div>
     <RealEstate.Web.Client.Components.Footer></RealEstate.Web.Client.Components.Footer>
 </div>
+@code {
+
+
+}

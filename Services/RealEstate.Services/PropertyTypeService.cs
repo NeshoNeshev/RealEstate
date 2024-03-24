@@ -17,6 +17,20 @@ namespace RealEstate.Services
             this.dbContext = dbContext;
         }
 
+        public async Task<IEnumerable<T>> GetAll<T>(int? count = null, bool orderByDesc = false)
+        {
+            IQueryable<PropertyType> query = this.dbContext.PropertyTypes.Where(x => x.IsDeleted == false);
+            if (count.HasValue)
+            {
+                query = query.Take(count.Value);
+            }
+            if (!orderByDesc)
+            {
+                query = query.OrderBy(x => x.Name);
+            }
+            var result = await query.To<T>().ToListAsync();
+            return result;
+        }
         public async Task<PropertyTypeViewModel> Get(string id)
         {
 
@@ -35,7 +49,6 @@ namespace RealEstate.Services
             {
                 Id = Guid.NewGuid().ToString(),
                 Name = model.Name,
-                DistrictId = model.DistrictId
             };
             await this.dbContext.PropertyTypes.AddAsync(type);
             await this.dbContext.SaveChangesAsync();
@@ -51,7 +64,6 @@ namespace RealEstate.Services
                 throw new InvalidOperationException("Id: не може да е null");
             }
             type.Name = model.Name;
-            type.DistrictId = model.DistrictId;
 
             this.dbContext.Update(type);
             await this.dbContext.SaveChangesAsync();
