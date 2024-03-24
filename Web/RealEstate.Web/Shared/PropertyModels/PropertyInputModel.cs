@@ -27,12 +27,16 @@ namespace RealEstate.Web.Shared.PropertyModels
         public string Statute { get; set; }
 
         [Required]
-        public Status Status { get; set; }
+        public string Status { get; set; }
 
         [Required]
         public string? UserId { get; set; }
 
         [Required]
         public string? PropertyTypeId { get; set; }
+
+        public string? DistrictId { get; set; }
+
+        public string TownId { get; set; }
     }
 }

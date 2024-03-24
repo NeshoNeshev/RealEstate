@@ -9,6 +9,7 @@ namespace RealEstate.Data.Models.DatabaseModels
         public Property()
         {
             this.PropertyInspections = new HashSet<PropertyInspection>();
+            this.ImagesUrls = new HashSet<ImagesUrls>();
         }
         public string? Code { get; set; }
 
@@ -47,6 +48,8 @@ namespace RealEstate.Data.Models.DatabaseModels
         public string? UserId { get; set; }
 
         public ApplicationUser? ApplicationUser { get; set; }
+
+        public virtual ICollection<ImagesUrls> ImagesUrls { get; set; }
 
         public virtual ICollection<PropertyInspection> PropertyInspections { get; set; }
     }

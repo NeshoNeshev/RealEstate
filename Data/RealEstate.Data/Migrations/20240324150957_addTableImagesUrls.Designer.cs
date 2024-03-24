@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealEstate.Data;
 
@@ -11,9 +12,10 @@ using RealEstate.Data;
 namespace RealEstate.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240324150957_addTableImagesUrls")]
+    partial class addTableImagesUrls
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,38 +409,6 @@ namespace RealEstate.Data.Migrations
                     b.ToTable("Districts");
                 });
 
-            modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.ImagesUrls", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PropertyId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("PropertyId");
-
-                    b.ToTable("Images");
-                });
-
             modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.Property", b =>
                 {
                     b.Property<string>("Id")
@@ -681,15 +651,6 @@ namespace RealEstate.Data.Migrations
                     b.Navigation("Town");
                 });
 
-            modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.ImagesUrls", b =>
-                {
-                    b.HasOne("RealEstate.Data.Models.DatabaseModels.Property", "Property")
-                        .WithMany("ImagesUrls")
-                        .HasForeignKey("PropertyId");
-
-                    b.Navigation("Property");
-                });
-
             modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.Property", b =>
                 {
                     b.HasOne("RealEstate.Data.Models.ApplicationModels.ApplicationUser", "ApplicationUser")
@@ -738,8 +699,6 @@ namespace RealEstate.Data.Migrations
 
             modelBuilder.Entity("RealEstate.Data.Models.DatabaseModels.Property", b =>
                 {
-                    b.Navigation("ImagesUrls");
-
                     b.Navigation("PropertyInspections");
                 });
 

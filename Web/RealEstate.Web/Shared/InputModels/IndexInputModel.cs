@@ -10,20 +10,20 @@ namespace RealEstate.Web.Shared.InputModels
         public string? propertyId { get; set; }
 
         [Required(ErrorMessage = "Полето е задължително")]
-        public string selectedTypeId { get; set; }
+        public string? selectedTypeId { get; set; }
 
         [Required(ErrorMessage = "Полето е задължително")]
-        public string heating { get; set; }
+        public string? heating { get; set; }
 
         [Required(ErrorMessage = "Полето е задължително")] 
-        public string furnitureLevel { get; set; }
+        public string? furnitureLevel { get; set; }
 
         [Required(ErrorMessage = "Полето е задължително")] 
-        public string selectedTown { get; set; }
+        public string? selectedTown { get; set; }
 
-        [Required(ErrorMessage = "Полето е задължително")]
-        public string from { get; set; }
+
+        public string? from { get; set; }
       
-        public string to { get; set; }
+        public string? to { get; set; }
     }
 }

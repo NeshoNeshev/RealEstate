@@ -33,6 +33,8 @@ namespace RealEstate.Data
 
         public DbSet<Town> Towns { get; set; }
 
+        public DbSet<ImagesUrls> Images { get; set; }
+
         public DbSet<PropertyInspection> PropertyInspections { get; set; }
         ///
         public override int SaveChanges() => this.SaveChanges(true);

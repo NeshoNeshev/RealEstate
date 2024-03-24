@@ -14,11 +14,8 @@ namespace RealEstate.Web.Client.Pages
     partial class Index
     {
         private IndexInputModel  inputModel= new IndexInputModel();
-        private string selectedDistrictId;
         private IndexViewModel? indexModel;
-        private List<TownViewModel>? townsViewModel;
         private List<DistrictViewModel> districts = new List<DistrictViewModel>();
-        private string selectedTypeId;
         private List<string>? heatings = new List<string>() {"ТЕЦ","Газ","Друго" };
         private List<string>? furnitureLevel = new List<string>() { "Обзаведен", "Необзаведен", "До ключ" };
 
@@ -57,6 +54,15 @@ namespace RealEstate.Web.Client.Pages
                 districts.Clear(); // Clear districts if no town is selected
             }
         }
-       
+        private async Task OnSubmit()
+        {
+            //var response = await Http.PostAsJsonAsync("Administrator/CreateLawFirm", model);
+            //if (response.IsSuccessStatusCode)
+            //{
+            //    Lawfirm = model.Name;
+            //    success = true;
+            //    StateHasChanged();
+            //}
+        }
     }
 }

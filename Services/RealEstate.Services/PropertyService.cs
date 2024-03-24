@@ -1,8 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using RealEstate.Data;
 using RealEstate.Data.Models.DatabaseModels;
+using RealEstate.Data.Models.Enumerations;
 using RealEstate.Services.Mapping;
 using RealEstate.Web.Shared.PropertyModels;
+using System;
 using static Nito.HashAlgorithms.CRC32;
 
 namespace RealEstate.Services
@@ -27,6 +29,9 @@ namespace RealEstate.Services
                 throw new InvalidOperationException("Имотът не  може да бъде създаден"); ;
             }
             var id = Guid.NewGuid().ToString();
+          
+            Status enumValue = (Status)Enum.Parse(typeof(Status), model.Status, true);
+
             var property = new Property()
             {
                 Id = id,
@@ -39,7 +44,7 @@ namespace RealEstate.Services
                 Description = model.Description,
                 Seen = 0,
                 Statute = model.Statute,
-                Status = model.Status,
+                Status = enumValue,
                 IsBuying = false,
                 IsSolded = false,
                 IsRental = false,

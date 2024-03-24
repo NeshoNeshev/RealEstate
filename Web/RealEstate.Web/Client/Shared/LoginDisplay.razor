@@ -6,8 +6,8 @@
 
 <AuthorizeView>
     <Authorized>
-        <a href="authentication/profile">Hello, @context.User.Identity?.Name!</a>
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Log out</button>
+        <a class="nav-link text-dark" href="authentication/profile">Профил</a>
+        <button class="nav-link btn btn-link" @onclick="BeginSignOut">Изход</button>
     </Authorized>
     <NotAuthorized>
         <a class="nav-link text-dark" href="authentication/register">Регистрация</a>
