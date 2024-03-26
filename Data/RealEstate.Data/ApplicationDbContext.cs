@@ -35,6 +35,10 @@ namespace RealEstate.Data
 
         public DbSet<ImagesUrls> Images { get; set; }
 
+        public DbSet<Messages> Messages { get; set; }
+
+        public DbSet<Requests> Requests { get; set; }
+
         public DbSet<PropertyInspection> PropertyInspections { get; set; }
         ///
         public override int SaveChanges() => this.SaveChanges(true);

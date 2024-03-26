@@ -1,5 +1,6 @@
 ﻿@page "/saleproperty"
 @using System.ComponentModel.DataAnnotations
+@using RealEstate.Web.Shared.PropertyModels
 <div class="container-xxl bg-white p-0">
     <!-- Spinner Start -->
     @* <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
@@ -46,10 +47,10 @@
                         </span>
                     </div>
                     <div class="row g-4">
-                      
+
 
                         <div class="col-lg-6">
-                              <h6>Какво получаваш с Адрес?</h6>
+                            <h6>Какво получаваш с Адрес?</h6>
                             <div class="row">
                                 <div class="col-md-6 col-sm-6">
                                     <div class="card" style="border: 1px dashed rgba(0, 185, 142, .3)">
@@ -95,67 +96,67 @@
 
 
                         </div>
-              
+
                         <div class="col-lg-6">
-                                      <h6>
-                            Попълнете формата или се свържете с нас на
-                            0888 11 22 00
-                        </h6>
+                            <h6>
+                                Попълнете формата или се свържете с нас на
+                                0888 11 22 00
+                            </h6>
                             <EditForm EditContext="@_editContext" OnValidSubmit="HandleOnValidSubmit">
                                 <DataAnnotationsValidator />
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                        <label for="name">Град:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" Placeholder="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
-                                    </div>                                   
-                                   <div class="col-md-6">
-                                        <label for="name">Квартал:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                        <label for="town">Град:</label>
+                                        <InputText id="town" class="form-control" @bind-Value="customerAddress.Town" />
+                                        <ValidationMessage For="@(() => customerAddress.Town)" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="distinct">Квартал:</label>
+                                        <InputText id="distinct" class="form-control" @bind-Value="customerAddress.District" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.District)" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-6">
-                                         <label for="name">Тип имот:</label>
-                                       <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                        <label for="type">Тип имот:</label>
+                                        <InputText id="type" class="form-control" @bind-Value="customerAddress.TypeProperty" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.TypeProperty)" />
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="name">Телефон:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                        <label for="phone">Телефон:</label>
+                                        <InputText id="phone" class="form-control" @bind-Value="customerAddress.Phone" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Phone)" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                   <div class="col-md-6">
-                                        <label for="name">Желана цена:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                    <div class="col-md-6">
+                                        <label for="price">Желана цена:</label>
+                                        <InputText id="price" class="form-control" @bind-Value="customerAddress.Price" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Price)" />
                                     </div>
                                     <div class="col-md-6">
-                                         <label for="name">Площ:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                        <label for="area">Площ:</label>
+                                        <InputText id="area" class="form-control" @bind-Value="customerAddress.Area" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Area)" />
                                     </div>
                                 </div>
-                              
+
                                 <div class="form-group row ">
                                     <div class="col-md-6">
-                                        <label for="name">Имейл:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                        <label for="email">Имейл:</label>
+                                        <InputText id="email" class="form-control" @bind-Value="customerAddress.Email" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Email)" />
                                     </div>
                                     <div class="col-md-6">
-                                         <label for="name">Име:</label>
-                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Address" DisplayName="Address" />
-                                        <ValidationMessage For="@(() => customerAddress.Address)" />
+                                        <label for="name">Име:</label>
+                                        <InputText id="name" class="form-control" @bind-Value="customerAddress.Names" DisplayName="Address" />
+                                        <ValidationMessage For="@(() => customerAddress.Names)" />
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-12 text-right" style="margin-top:20px;">
-                                        <button type="submit" class="btn btn-success float-right btn-lg">Submit</button>
+                                        <button type="submit" class="btn btn-success float-right btn-lg">Изпрати</button>
                                     </div>
                                 </div>
                             </EditForm>
@@ -263,7 +264,7 @@
     }
 </style>
 @code {
-    private CustomerAddress customerAddress = new();
+    private RequestModel customerAddress = new();
     private EditContext _editContext;
 
 
@@ -273,9 +274,14 @@
         base.OnInitialized();
     }
 
-    public void HandleOnValidSubmit()
+    public async Task HandleOnValidSubmit()
     {
-        Console.WriteLine($"Customer name is {customerAddress.CustomerName} and address is {customerAddress.Address}");
+        Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI.NoAuthenticationClient");
+        var status = await Http.PostAsJsonAsync<RequestModel>("Administration/SendRequest", customerAddress);
+        if (status.IsSuccessStatusCode)
+        {
+            customerAddress = new();
+        }
     }
 
 
@@ -283,9 +289,20 @@
     public class CustomerAddress
     {
         [Required]
-        public string CustomerName { get; set; }
-
+        public string? Town { get; set; }
         [Required]
-        public string Address { get; set; }
+        public string? District { get; set; }
+        [Required]
+        public string? TypeProperty { get; set; }
+        [Required]
+        public string? Phone { get; set; }
+        [Required]
+        public string? Price { get; set; }
+        [Required]
+        public string? Area { get; set; }
+        [Required]
+        public string? Email { get; set; }
+        [Required]
+        public string? Names { get; set; }
     }
 }

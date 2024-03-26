@@ -1,10 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using RealEstate.Data;
+using RealEstate.Data.Migrations;
+using RealEstate.Data.Models.ApplicationModels;
 using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Data.Models.Enumerations;
 using RealEstate.Services.Mapping;
+using RealEstate.Web.Shared;
 using RealEstate.Web.Shared.PropertyModels;
 using System;
+using System.Drawing;
 using static Nito.HashAlgorithms.CRC32;
 
 namespace RealEstate.Services
@@ -14,28 +19,59 @@ namespace RealEstate.Services
         private readonly IPropertyTypeService propertyTypeService;
         private readonly ApplicationDbContext dbContext;
 
-        public PropertyService(IPropertyTypeService propertyTypeService,ApplicationDbContext dbContext)
+        public PropertyService(IPropertyTypeService propertyTypeService, ApplicationDbContext dbContext)
         {
             this.propertyTypeService = propertyTypeService;
             this.dbContext = dbContext;
         }
-        
+        public async Task Requsts(RequestModel model) 
+        {
+            var request = new Requests()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Town =model.Town,
+                District = model.District,
+                TypeProperty = model.TypeProperty,
+                Phone = model.Phone,
+                Price = model.Price,
+                Area = model.Area,
+                Email = model.Email,
+                Names = model.Names,
+                IsView = false,
+            };
+            await this.dbContext.Requests.AddAsync(request);
+            await this.dbContext.SaveChangesAsync();
+        }
+
+        public async Task Message(MessageModel model)
+        {
+            var request = new Messages()
+            {
+                Id = Guid.NewGuid().ToString(),
+               Names = model.Names,
+               Regarding = model.Regarding,
+               Message = model.Message,
+               Email = model.Email
+            };
+            await this.dbContext.Messages.AddAsync(request);
+            await this.dbContext.SaveChangesAsync();
+        }
         public async Task<string> Create(PropertyInputModel model)
         {
-            var propertyType = this.propertyTypeService.Get(model.PropertyTypeId);
+            var propertyType = await this.propertyTypeService.Get(model.PropertyTypeId);
+
             var user = await this.dbContext.Users.FirstOrDefaultAsync(x => x.Id == model.UserId);
-            if (user == null || propertyType == null)
+            if (user != null || propertyType == null)
             {
                 throw new InvalidOperationException("Имотът не  може да бъде създаден"); ;
             }
             var id = Guid.NewGuid().ToString();
-          
-            Status enumValue = (Status)Enum.Parse(typeof(Status), model.Status, true);
 
+            Status enumValue = (Status)Enum.Parse(typeof(Status), model.Status, true);
             var property = new Property()
             {
                 Id = id,
-                Code = Crc(id),
+                Code = Guid.NewGuid().ToString(),
                 Price = model.Price,
                 Area = model.Area,
                 Floor = model.Floor,
@@ -48,12 +84,15 @@ namespace RealEstate.Services
                 IsBuying = false,
                 IsSolded = false,
                 IsRental = false,
-                UserId = user.Id,
+                DistrictId = model.DistrictId,
                 PropertyTypeId = model.PropertyTypeId,
+                UserId = null,
+                ApplicationUserId = "b80b347e-0da8-4096-bc1b-8e3e260e4636",
             };
+           
             await this.dbContext.Properties.AddAsync(property);
             await this.dbContext.SaveChangesAsync();
-
+            await AddTableImagesUrls(model.Images, property.Id);
             return property.Id;
         }
         public async Task<bool> Delete(string properyId)
@@ -116,6 +155,20 @@ namespace RealEstate.Services
             var crc32Hex = Convert.ToHexString(crc32);
 
             return crc32Hex;
+        }
+        private async Task AddTableImagesUrls(List<string> paths, string propertyId)
+        {
+            foreach (var item in paths)
+            {
+                var image = new ImagesUrls()
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Url = item,
+                    PropertyId = propertyId,
+                };
+                await this.dbContext.Images.AddAsync(image);
+                await this.dbContext.SaveChangesAsync();
+            }
         }
     }
 }

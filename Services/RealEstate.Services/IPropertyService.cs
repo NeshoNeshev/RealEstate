@@ -1,4 +1,5 @@
-﻿using RealEstate.Web.Shared.PropertyModels;
+﻿using RealEstate.Web.Shared;
+using RealEstate.Web.Shared.PropertyModels;
 
 namespace RealEstate.Services
 {
@@ -11,5 +12,8 @@ namespace RealEstate.Services
         public Task<PropertyViewModel> Get(string properyId);
 
         public Task Update (PropertyUpdateModel model);
+
+        public Task Requsts(RequestModel model);
+        public Task Message(MessageModel model);
     }
 }

@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Components.Forms;
 using RealEstate.Web.Shared;
 using RealEstate.Web.Shared.PropertyModels;
 using System.Data;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace RealEstate.Web.Client.Pages
 {
     partial class CreateProperty
     {
+        private string townId = String.Empty;
         private bool updateStatus = false;
         List<ImageFile> filesBase64 = new List<ImageFile>();
         string message = "InputFile";
@@ -44,6 +46,9 @@ namespace RealEstate.Web.Client.Pages
             this.updateStatus = status;
             StateHasChanged();
         }
+        private void GetPropertyInTown() {
+             
+        }
         private void SelectionChanged(ChangeEventArgs e)
         {
             selectedTown = e.Value.ToString();
@@ -66,18 +71,18 @@ namespace RealEstate.Web.Client.Pages
             message = "Click UPLOAD to continue";
         }
 
-        async Task Upload()
+        async Task<List<string>> Upload()
         {
-            isDisabled = true;
-            using (var msg = await Http.PostAsJsonAsync<List<ImageFile>>("Administration/UploadImages", filesBase64, System.Threading.CancellationToken.None))
+            var response = await Http.PostAsJsonAsync<List<ImageFile>>("Administration/UploadImages", filesBase64, System.Threading.CancellationToken.None);
+            if (response.IsSuccessStatusCode)
             {
-                isDisabled = false;
-                if (msg.IsSuccessStatusCode)
-                {
-                    message = $"{filesBase64.Count} files uploaded";
-                    filesBase64.Clear();
-                }
+                var imagesPath = await response.Content.ReadFromJsonAsync<List<string>>();
+                // Use imagesPath as needed, for example, display the paths
+                message = $"{filesBase64.Count} files uploaded";
+                filesBase64.Clear();
+                return imagesPath;
             }
+            return null;
         }
         private void LoadDistricts(string townId)
         {
@@ -94,14 +99,16 @@ namespace RealEstate.Web.Client.Pages
         }
         private async Task OnSubmit()
         {
-            Upload();
-            //var response = await Http.PostAsJsonAsync("Administrator/CreateLawFirm", model);
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Lawfirm = model.Name;
-            //    success = true;
-            //    StateHasChanged();
-            //}
+            this.inputModel.TownId = selectedTown;
+            var response = await Upload();
+            inputModel.Images = response;
+            inputModel.Statute = inputModel.Status;
+            var status = await Http.PostAsJsonAsync<PropertyInputModel>("Administration/CreateProperty", inputModel);
+            if (status.IsSuccessStatusCode)
+            {
+                this.inputModel = new PropertyInputModel();
+                StateHasChanged();
+            }
         }
     }
 }
