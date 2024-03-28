@@ -12,7 +12,7 @@ namespace RealEstate.Services
         public Task<PropertyViewModel> Get(string properyId);
 
         public Task Update (PropertyUpdateModel model);
-
+        Task<IEnumerable<T>> GetAll<T>(string townId);
         public Task Requsts(RequestModel model);
         public Task Message(MessageModel model);
     }

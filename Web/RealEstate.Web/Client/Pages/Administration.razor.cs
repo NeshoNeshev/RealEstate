@@ -1,4 +1,10 @@
 ﻿using BlazorBootstrap;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using RealEstate.Data.Models.DatabaseModels;
+using RealEstate.Web.Shared.NotificationModels;
+using RealEstate.Web.Shared.PropertyModels;
+using RealEstate.Web.Shared.ViewModels;
+using System.Net.Http.Json;
 
 namespace RealEstate.Web.Client.Pages
 {
@@ -7,27 +13,58 @@ namespace RealEstate.Web.Client.Pages
         private BarChart barChart = default!;
         private BarChartOptions barChartOptions = default!;
         private ChartData chartData = default!;
-
+        private List<ToastMessage> messages = new List<ToastMessage>();
+        private List<ToastMessage> requests = new List<ToastMessage>();
+        private NotificationViewModel? notifi = new();
         private int datasetsCount = 0;
         private int labelsCount = 0;
         private string[] months = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
         private Random random = new();
-
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
+            Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI.NoAuthenticationClient");
+            try
+            {
+
+                var response = await Http.GetFromJsonAsync<NotificationViewModel>("Administration/GetNotifications");
+               
+                if (response != null)
+                {
+                    notifi = response;
+                }
+
+            }
+            catch (AccessTokenNotAvailableException exception)
+            {
+                exception.Redirect();
+            }
+
+            
+            
             chartData = new ChartData { Labels = GetDefaultDataLabels(6), Datasets = GetDefaultDataSets(3) };
             barChartOptions = new BarChartOptions { Responsive = true, Interaction = new Interaction { Mode = InteractionMode.Index } };
+            await base.OnInitializedAsync();
         }
+       
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
             {
+
+                
+                chartData = new ChartData { Labels = GetDefaultDataLabels(6), Datasets = GetDefaultDataSets(3) };
+                barChartOptions = new BarChartOptions { Responsive = true, Interaction = new Interaction { Mode = InteractionMode.Index } };
                 await barChart.InitializeAsync(chartData, barChartOptions);
             }
             await base.OnAfterRenderAsync(firstRender);
         }
+       
 
+        //Title = "Blazor Bootstrap",
+        //        HelpText = $"{DateTime.Now}",
+        //        Message = $"Hello, world! This is a toast message. DateTime: {DateTime.Now}",
+       
         private async Task RandomizeAsync()
         {
             if (chartData is null || chartData.Datasets is null || !chartData.Datasets.Any()) return;

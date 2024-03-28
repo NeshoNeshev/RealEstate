@@ -26,19 +26,40 @@
                 <div class="container-fluid bg-primary mb-5">
                     <div class="row">
                         <div class="col-md-8">
+                            @if (propertyViewModels == null)
+                            {
+                                <p>sdasdasd</p>
+                            }
+                            else
+                            {
+                                @foreach (var item in propertyViewModels)
+                                {
+                                    <p>@item.Code</p>
+                                }
+                            }
                         </div>
-                         <div class="col-md-4">
-                             <div class=" form-group">
-                                    <span style="color: white"> Град</span>
-                                    <select class="form-select border-0 py-3" @onchange="GetPropertyInTown" value="@townId">
-                                       
-                                        <option disabled selected value="">Изберете град</option>
-                                        @foreach (var town in indexModel.Towns)
-                                        {
-                                            <option value="@town.Id">@town.Name</option>
-                                        }
-                                    </select>
-                                </div>
+                        <div class="col-md-4">
+                            <div class=" form-group">
+                                <span style="color: white"> Град</span>
+                                <select class="form-select border-0 py-3" @onchange="SelectionChanged" value="@townId">
+
+                                    <option disabled selected value="">Изберете град</option>
+                                    @foreach (var town in indexModel.Towns)
+                                    {
+                                        <option value="@town.Id">@town.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class=" form-group">
+                                <span style="color: white"> Квартал</span>
+                                <select class="form-select border-0 py-3" @onchange="GetPropertyInTown">
+                                    <option selected disabled>Изберете квартал</option>
+                                    @foreach (var district in districts)
+                                    {
+                                        <option value="@district.Id">@district.Name</option>
+                                    }
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -46,127 +67,135 @@
             }
             else
             {
-                <div class="container-fluid bg-primary mb-5">
-                    <div class="row">
-                        <div class="col-md-8">
-                            @foreach (var item in filesBase64)
-                            {
-                                <div class="col-md-4">
-                                    <div class="card">
-                                        <img src="data:@item.contentType;base64,@item.base64data" />
+                if (indexModel == null)
+                {
+                    <p>dsadas</p>
+                }
+                else
+                {
+                    <div class="container-fluid bg-primary mb-5">
+                        <div class="row">
+                            <div class="col-md-8">
+                                @foreach (var item in filesBase64)
+                                {
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <img src="data:@item.contentType;base64,@item.base64data" />
+                                        </div>
                                     </div>
-                                </div>
 
-                            }
-                        </div>
-                        <div class="col-md-4">
-                            <EditForm Model="@inputModel" OnValidSubmit="@OnSubmit" Context="form" class="form-group" enctype="multipart/form-data">
-                                <DataAnnotationsValidator />
-                                <div class=" form-group">
-                                    <span style="color: white"> Град</span>
-                                    <select class="form-select border-0 py-3" @onchange="SelectionChanged" value="@inputModel.TownId">
-                                        <ValidationMessage For="@(() => inputModel.TownId)" />
-                                        <option disabled selected value="">Изберете град</option>
-                                        @foreach (var town in indexModel.Towns)
-                                        {
-                                            <option value="@town.Id">@town.Name</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <span style="color: white"> Квартал</span>
-                                    <select class="form-select border-0 py-3" @bind="@inputModel.DistrictId">
-                                        <ValidationMessage For="@(() => inputModel.DistrictId)" />
-                                        <option selected disabled>Изберете квартал</option>
-                                        @foreach (var district in districts)
-                                        {
-                                            <option value="@district.Id">@district.Name</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <span style="color: white"> Тип</span>
-                                    <select class="form-select border-0 py-3" @bind="@inputModel.PropertyTypeId">
-                                        <ValidationMessage For="@(() => inputModel.PropertyTypeId)" />
-                                        <option selected disabled>Тип имот</option>
-                                        @foreach (var type in indexModel.Types)
-                                        {
-                                            <option value="@type.Id">@type.Name</option>
-                                        }
-                                    </select>
-                                </div>
-
-
-                                <div>
-                                    <span style="color: white"> Отопление</span>
-                               
-                                    <select class="form-select border-0 py-3" @bind="@inputModel.Heating">
-                                         <option selected disabled>Отопление</option>
-                                        @foreach (var heating in heatings)
-                                        {
-                                            <option value="@heating">@heating</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <span style="color: white"> Обзавеждане</span>
-                                    <select class="form-select border-0 py-3" @bind="@inputModel.FurnishedLevel">
-                                        <option selected disabled>Обзавеждане</option>
-                                        @foreach (var level in furnitureLevel)
-                                        {
-                                            <option value="@level">@level</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <span style="color: white"> Satus</span>
-                                    <select class="form-select border-0 py-3" @bind="@inputModel.Status">
-                                        <option selected disabled>Статус</option>
-                                        @foreach (var level in statuses)
-                                        {
-                                            <option value="@level">@level</option>
-                                        }
-                                    </select>
-                                </div>
-                                <div>
-                                    <span style="color: white">Квадратура</span>
-                                    <ValidationMessage For="@(() => inputModel.Area)" />
-                                    <input type="number" class="form-control border-0 py-3" @bind="@inputModel.Area">
-                                </div>
-                                <div>
-                                    <span style="color: white"> Цена</span>
-                                    <ValidationMessage For="@(() => inputModel.Price)" />
-                                    <input type="number" class="form-control border-0 py-3" @bind="@inputModel.Price">
-                                </div>
-                                <div>
-                                    <span style="color: white">Етаж</span>
-                                    <ValidationMessage For="@(() => inputModel.Floor)" />
-                                    <input type="text" class="form-control border-0 py-3" @bind="@inputModel.Floor">
-                                </div>
-                                <div>
-                                    <span style="color: white">Описание</span>
-                                    <ValidationMessage For="@(() => inputModel.Description)" />
-                                    <textarea type="text" class="form-control border-0 py-3" @bind="@inputModel.Description"></textarea>
-                                </div>
-                                <div class="input-group" style="margin-top: 20px;">
-                                    <div class="custom-file">
-                                        <InputFile class="custom-file-input" multiple OnChange="OnChange" id="inputFile" />
+                                }
+                            </div>
+                            <div class="col-md-4">
+                                <EditForm Model="@inputModel" OnValidSubmit="@OnSubmit" Context="form" class="form-group" enctype="multipart/form-data">
+                                    <DataAnnotationsValidator />
+                                    <div class=" form-group">
+                                        <span style="color: white"> Град</span>
+                                        <select class="form-select border-0 py-3" @onchange="SelectionChanged" value="@inputModel.TownId">
+                                            <ValidationMessage For="@(() => inputModel.TownId)" />
+                                            <option disabled selected value="">Изберете град</option>
+                                            @foreach (var town in indexModel.Towns)
+                                            {
+                                                <option value="@town.Id">@town.Name</option>
+                                            }
+                                        </select>
                                     </div>
-                                    @*  <div class="input-group-append">
+                                    <div>
+                                        <span style="color: white"> Квартал</span>
+                                        <select class="form-select border-0 py-3" @bind="@inputModel.DistrictId">
+                                            <ValidationMessage For="@(() => inputModel.DistrictId)" />
+                                            <option selected disabled>Изберете квартал</option>
+                                            @foreach (var district in districts)
+                                            {
+                                                <option value="@district.Id">@district.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span style="color: white"> Тип</span>
+                                        <select class="form-select border-0 py-3" @bind="@inputModel.PropertyTypeId">
+                                            <ValidationMessage For="@(() => inputModel.PropertyTypeId)" />
+                                            <option selected disabled>Тип имот</option>
+                                            @foreach (var type in indexModel.Types)
+                                            {
+                                                <option value="@type.Id">@type.Name</option>
+                                            }
+                                        </select>
+                                    </div>
+
+
+                                    <div>
+                                        <span style="color: white"> Отопление</span>
+
+                                        <select class="form-select border-0 py-3" @bind="@inputModel.Heating">
+                                            <option selected disabled>Отопление</option>
+                                            @foreach (var heating in heatings)
+                                            {
+                                                <option value="@heating">@heating</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span style="color: white"> Обзавеждане</span>
+                                        <select class="form-select border-0 py-3" @bind="@inputModel.FurnishedLevel">
+                                            <option selected disabled>Обзавеждане</option>
+                                            @foreach (var level in furnitureLevel)
+                                            {
+                                                <option value="@level">@level</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span style="color: white"> Satus</span>
+                                        <select class="form-select border-0 py-3" @bind="@inputModel.Status">
+                                            <option selected disabled>Статус</option>
+                                            @foreach (var level in statuses)
+                                            {
+                                                <option value="@level">@level</option>
+                                            }
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <span style="color: white">Квадратура</span>
+                                        <ValidationMessage For="@(() => inputModel.Area)" />
+                                        <input type="number" class="form-control border-0 py-3" @bind="@inputModel.Area">
+                                    </div>
+                                    <div>
+                                        <span style="color: white"> Цена</span>
+                                        <ValidationMessage For="@(() => inputModel.Price)" />
+                                        <input type="number" class="form-control border-0 py-3" @bind="@inputModel.Price">
+                                    </div>
+                                    <div>
+                                        <span style="color: white">Етаж</span>
+                                        <ValidationMessage For="@(() => inputModel.Floor)" />
+                                        <input type="text" class="form-control border-0 py-3" @bind="@inputModel.Floor">
+                                    </div>
+                                    <div>
+                                        <span style="color: white">Описание</span>
+                                        <ValidationMessage For="@(() => inputModel.Description)" />
+                                        <textarea type="text" class="form-control border-0 py-3" @bind="@inputModel.Description"></textarea>
+                                    </div>
+                                    <div class="input-group" style="margin-top: 20px;">
+                                        <div class="custom-file">
+                                            <InputFile class="custom-file-input" multiple OnChange="OnChange" id="inputFile" />
+                                        </div>
+                                        @*  <div class="input-group-append">
                                 <button class="btn btn-success" @onclick="Upload" disabled="@isDisabled">Upload</button>
                                 </div>*@
-                                </div>
-                                <div class="-flex justify-content-center align-items-center marginButton">
+                                    </div>
+                                    <div class="-flex justify-content-center align-items-center marginButton">
 
-                                    <button class="btn btn-dark  border-0 py-3" type="submit">Запази</button>
+                                        <button class="btn btn-dark  border-0 py-3" type="submit">Запази</button>
+                                    </div>
+                                </EditForm>
+                                <div>
                                 </div>
-                            </EditForm>
-                            <div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
-                </div>
+                }
+
             }
 
         </div>

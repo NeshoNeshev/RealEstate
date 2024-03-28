@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using RealEstate.Services;
 using RealEstate.Web.Shared;
+using RealEstate.Web.Shared.NotificationModels;
 using RealEstate.Web.Shared.PropertyModels;
 using System.Data;
 using System.IO;
@@ -16,10 +17,13 @@ namespace RealEstate.Web.Server.Controllers
     {
         private readonly IWebHostEnvironment env;
         private readonly IPropertyService propertyService;
-        public AdministrationController(IWebHostEnvironment env, IPropertyService propertyService)
+        private readonly INotificationService notificationService;
+
+        public AdministrationController(IWebHostEnvironment env, IPropertyService propertyService, INotificationService notificationService)
         {
             this.env = env;
             this.propertyService = propertyService;
+            this.notificationService = notificationService;
         }
         [HttpPost("UploadImages")]
         public async Task<List<string>> Post([FromBody] ImageFile[] files)
@@ -77,6 +81,23 @@ namespace RealEstate.Web.Server.Controllers
 
                 throw;
             }
+        }
+        [HttpGet("GetNotifications")]
+        public async Task<NotificationViewModel> GetNotifications()
+        {
+            var notifications = new NotificationViewModel();
+            notifications.Messages = await this.notificationService.GetAllMessages<MessageViewModel>();
+            notifications.Requests = await this.notificationService.GetAllRequests<RequestViewModel>();
+
+            return notifications;
+        }
+        [HttpGet("GetPropertiesByTownId")]
+        public async Task<IEnumerable<PropertyViewModel>> GetPropertiesByTownId(string Id)
+        {
+            var response = new List<PropertyViewModel>();
+            var sresponse = await this.propertyService.GetAll<PropertyViewModel>(Id);
+            response = sresponse.ToList();
+            return response;
         }
     }
 }

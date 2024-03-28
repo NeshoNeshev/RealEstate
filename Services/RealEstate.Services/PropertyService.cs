@@ -24,6 +24,13 @@ namespace RealEstate.Services
             this.propertyTypeService = propertyTypeService;
             this.dbContext = dbContext;
         }
+        public async Task<IEnumerable<T>> GetAll<T>(string distinctId)
+        {
+            IQueryable<Property> query = this.dbContext.Properties.Where(x => x.IsDeleted == false).Where(x=>x.DistrictId == distinctId);
+         
+            var result = await query.To<T>().ToListAsync();
+            return result;
+        }
         public async Task Requsts(RequestModel model) 
         {
             var request = new Requests()

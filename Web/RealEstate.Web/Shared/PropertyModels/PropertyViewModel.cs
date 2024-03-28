@@ -8,13 +8,13 @@ namespace RealEstate.Web.Shared.PropertyModels
     // това е модел за цруд операция ориентирай се по имената input e за записване в базата а view за фронтенда
     public class PropertyViewModel : IMapFrom<Property>
     {
-        public int Code { get; set; }
+        public string? Code { get; set; }
 
-        public double Price { get; set; }
+        public double? Price { get; set; }
 
-        public double Area { get; set; }
+        public double? Area { get; set; }
 
-        public int Floor { get; set; }
+        public int? Floor { get; set; }
 
         public string? Heating { get; set; }
 
@@ -22,11 +22,11 @@ namespace RealEstate.Web.Shared.PropertyModels
 
         public string? Description { get; set; }
 
-        public int Seen { get; set; }
+        public int? Seen { get; set; }
 
-        public string Statute { get; set; }
+        public string? Statute { get; set; }
 
-        public Status Status { get; set; }
+        public Status? Status { get; set; }
 
         public bool IsBuying { get; set; }
 
@@ -34,10 +34,8 @@ namespace RealEstate.Web.Shared.PropertyModels
 
         public bool IsRental { get; set; }
 
-        //public PropertyType? PropertyType { get; set; }
+        public string? DistrictId { get; set; }
 
-        //public ApplicationUser? ApplicationUser { get; set; }
-
-        //public ICollection<View> Views { get; set; }
+        public string? PropertyTypeId { get; set; }
     }
 }

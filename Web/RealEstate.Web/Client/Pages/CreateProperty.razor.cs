@@ -21,6 +21,7 @@ namespace RealEstate.Web.Client.Pages
         bool isDisabled = false;
         private PropertyInputModel inputModel = new PropertyInputModel();
         private IndexViewModel? indexModel;
+        private List<PropertyViewModel> propertyViewModels = new();
         private List<DistrictViewModel> districts = new List<DistrictViewModel>();
         private List<string>? heatings = new List<string>() { "ТЕЦ", "Газ", "Друго" };
         private List<string>? furnitureLevel = new List<string>() { "Обзаведен", "Необзаведен", "До ключ" };
@@ -31,7 +32,7 @@ namespace RealEstate.Web.Client.Pages
             Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI");
             try
             {
-
+               
                 indexModel = await Http.GetFromJsonAsync<IndexViewModel>("Index");
 
             }
@@ -46,8 +47,18 @@ namespace RealEstate.Web.Client.Pages
             this.updateStatus = status;
             StateHasChanged();
         }
-        private void GetPropertyInTown() {
-             
+        private async Task GetPropertyInTown(ChangeEventArgs e) 
+        {
+            var Id = e.Value.ToString();
+            //$"Administration/GetPropertiesByTownId?Id={Id}"
+            var response = await Http.GetFromJsonAsync<List<PropertyViewModel>>($"Administration/GetPropertiesByTownId?Id={Id}");
+            propertyViewModels = response;
+
+            if (e.Value == null && string.IsNullOrWhiteSpace(e.Value.ToString()))
+            {
+                propertyViewModels = new();
+            }
+           
         }
         private void SelectionChanged(ChangeEventArgs e)
         {

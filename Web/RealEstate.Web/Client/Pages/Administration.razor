@@ -7,13 +7,41 @@
             <div class="row g-2">
                 <div class="col">
                     <h2 class="text-center">Administration</h2>
+                    @if (notifi == null)
+                    {
+                        <p>null</p>
+                    }else
+                    {
+                        <Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopRight" />
+                        <Toasts class="p-3" Messages="requests" Placement="ToastsPlacement.TopLeft" />
+                        <div class="row" style="margin-bottom: 20px;">
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2">
+                                    <Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="() => ShowRequest(ToastType.Secondary)">
+                                        Заявки <Badge Color="BadgeColor.Danger">@notifi?.Requests.Count()</Badge>
+                                    </Button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-grid gap-2">
+                                    <Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="() => ShowMessage(ToastType.Secondary)">
+                                        Съобщения <Badge Color="BadgeColor.Danger">@notifi?.Messages.Count()</Badge>
+                                    </Button>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                   
+
+
                 </div>
             </div>
             <div class="row" style="margin-bottom: 20px;">
                 <div>
-                    <BarChart @ref="barChart" Width="800" Height="400"  />
+                    <BarChart @ref="barChart" Width="800" Height="400" />
                 </div>
-               <div class="row">
+                <div class="row">
                     <div class="col-md-2">
                         <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await RandomizeAsync()"> Randomize </Button>
                     </div>
@@ -29,7 +57,7 @@
                     <div class="col-md-2">
                         <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await ShowVerticalBarChartAsync()">Vertical Bar Chart</Button>
                     </div>
-               </div>
+                </div>
             </div>
         </div>
 
@@ -47,7 +75,40 @@
 </AuthorizeView>
 
 
-
 @code {
+
+    private void ShowMessage(ToastType toastType)
+    {
+        if (notifi.Messages.Count() > 0)
+        {
+            foreach (var item in notifi?.Messages)
+            {
+                messages.Add(CreateToastMessage(toastType, item?.Names, item?.Email, item?.Message));
+            }
+
+        }
+
+    }
+    private void ShowRequest(ToastType toastType)
+    {
+        if (notifi.Requests.Count() > 0)
+        {
+            foreach (var item in notifi.Requests)
+            {
+                requests.Add(CreateToastMessage(toastType, item.Names, item.Email, $"Град: {item.Town} Квадратура: {item.Area} Цена: {item.Price}"));
+            }
+        }
+
+    }
+    private ToastMessage CreateToastMessage(ToastType toastType, string title, string helpText, string message)
+    {
+        return new ToastMessage
+            {
+                Type = toastType,
+                Title = title,
+                HelpText = helpText,
+                Message = message,
+            };
+    }
 
 }
