@@ -35,7 +35,7 @@ namespace RealEstate.Web.Server.Controllers
                 var buf = Convert.FromBase64String(file.base64data);
                 var path = Path.Combine(env.ContentRootPath, "wwwroot/images", file.fileName);
                 await System.IO.File.WriteAllBytesAsync(path, buf);
-                var relativePath = $"images/ +{Guid.NewGuid().ToString()}+{file.fileName}";//Path.Combine("images", file.fileName);
+                var relativePath = $"images/{file.fileName}";//Path.Combine("images", file.fileName);310612
                 imagesPath.Add(relativePath);
 
             }

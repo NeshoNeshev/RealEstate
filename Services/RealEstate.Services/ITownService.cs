@@ -5,7 +5,7 @@ namespace RealEstate.Services
     public interface ITownService
     {
         Task<IEnumerable<T>> GetAll<T>(int? count = null, bool orderByDesc = false);
-
+        Task<string> GetTownByDistrictId(string districtId);
         public Task<string> GetTownId(string id);
         public Task<TownViewModel> GetTown(string townId);
 

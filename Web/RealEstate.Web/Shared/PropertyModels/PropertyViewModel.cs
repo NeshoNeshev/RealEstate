@@ -8,6 +8,8 @@ namespace RealEstate.Web.Shared.PropertyModels
     // това е модел за цруд операция ориентирай се по имената input e за записване в базата а view за фронтенда
     public class PropertyViewModel : IMapFrom<Property>
     {
+        public string? Id { get; set; }
+
         public string? Code { get; set; }
 
         public double? Price { get; set; }
@@ -36,6 +38,14 @@ namespace RealEstate.Web.Shared.PropertyModels
 
         public string? DistrictId { get; set; }
 
+        public string? DistrictName { get; set; }
+
         public string? PropertyTypeId { get; set; }
+
+        public string? PropertyTypeName { get; set; }
+
+        public string? TownName { get; set; }
+
+        public IEnumerable<ImagesModels>? ImagesUrls { get; set; }
     }
 }

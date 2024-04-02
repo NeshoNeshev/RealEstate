@@ -31,6 +31,16 @@ namespace RealEstate.Services
             var result = await query.To<T>().ToListAsync();
             return result;
         }
+        public async Task<IEnumerable<T>> GetTopProperties<T>(int? count = null)
+        {
+            IQueryable<Property> query = this.dbContext.Properties.Where(x => x.IsDeleted == false);
+            if (count.HasValue)
+            {
+                query = query.Take(count.Value);
+            }
+            var result = await query.To<T>().ToListAsync();
+            return result;
+        }
         public async Task Requsts(RequestModel model) 
         {
             var request = new Requests()

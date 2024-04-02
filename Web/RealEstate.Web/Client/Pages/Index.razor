@@ -119,14 +119,20 @@
 
             </div>
             <div class="row g-4">
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-apartment.png" Type="Едностаен апартамент" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-villa.png" Type="Къща" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-house.png" Type="Двустаен Апартамент" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-housing.png" Type="Офис" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-building.png" Type="Хотел" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-neighborhood.png" Type="Мезонет" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-condominium.png" Type="Магазин" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
-                <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-luxury.png" Type="Тристаен апартамент" Count="123"></RealEstate.Web.Client.Components.TypeProperty>
+                @if (indexModel?.countsModels != null)
+                {
+                    
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-apartment.png" Type="@indexModel.countsModels[0].Name" Count="@indexModel.countsModels[0].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-villa.png" Type="@indexModel.countsModels[1].Name" Count="indexModel.countsModels[1].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-house.png" Type="@indexModel.countsModels[2].Name" Count="indexModel.countsModels[2].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-housing.png" Type="@indexModel.countsModels[3].Name" Count="indexModel.countsModels[3].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-building.png" Type="@indexModel.countsModels[4].Name" Count="indexModel.countsModels[4].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-neighborhood.png" Type="@indexModel.countsModels[5].Name" Count="indexModel.countsModels[5].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-condominium.png" Type="@indexModel.countsModels[6].Name" Count="indexModel.countsModels[6].Count"></RealEstate.Web.Client.Components.TypeProperty>
+                    <RealEstate.Web.Client.Components.TypeProperty ImgUrl="img/icon-luxury.png" Type="@indexModel.countsModels[7].Name" Count="indexModel.countsModels[7].Count"></RealEstate.Web.Client.Components.TypeProperty>
+
+                }
+              
 
             </div>
         </div>
@@ -143,11 +149,14 @@
                 </div>
                 <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                     <h1 class="mb-4">№1 място за намиране на идеалния имот</h1>
-                    <p class="mb-4">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Tempor erat elitr rebum at clita</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Aliqu diam amet diam et eos</p>
-                    <p><i class="fa fa-check text-primary me-3"></i>Clita duo justo magna dolore erat amet</p>
-                    <a class="btn btn-primary py-3 px-5 mt-3" href="/About">Прочети повече</a>
+                    <p class="mb-4">
+                        Ние сме съсредоточени в областта на недвижимите имоти и разполагаме със значителен опит. Нашите брокери са обучени и знаещи специалисти, които могат да ви помогнат да намерите идеалния имот според вашите нужди.
+                    </p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Професионализъм и опит</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Разнообразие от имоти</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Подкрепа през целия процес</p>
+                    <p><i class="fa fa-check text-primary me-3"></i>Прозрачност и честност</p>
+                    <a class="btn btn-primary py-3 px-5 mt-3" href="/why-should-i-buy">Прочети повече</a>
                 </div>
             </div>
         </div>
@@ -159,272 +168,30 @@
             <div class="row g-0 gx-5 align-items-end">
                 <div class="col-lg-6">
                     <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                        <h1 class="mb-3">Обяви за имоти</h1>
-                        <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit diam justo sed rebum.</p>
+                        <h1 class="mb-3">Топ имоти</h1>
+                        <p>Разгледайте нашите топ имоти.</p>
                     </div>
                 </div>
 
             </div>
             <div class="tab-content">
+
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
-                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-1.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                        </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-2.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                        </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-3.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                        </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-4.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                        </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-5.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                        </RealEstate.Web.Client.Components.Property>
-                        <RealEstate.Web.Client.Components.Property Town="Бургас" Price="12,111 euro" ImgUrl="img/property-6.jpg" Status="Продажба" Type="Едностаен апартамент" Distinct="Център" Area="76">
-                        </RealEstate.Web.Client.Components.Property>
+                        @if (indexModel?.Properties != null)
+                        {
+                            @foreach (var item in indexModel.Properties)
+                            {
+                                 <RealEstate.Web.Client.Components.Property Town="@item.TownName" Price="@item.Price.ToString()" ImgUrl="@item.ImagesUrls.First().Url" Status="@item.Status.ToString()"
+                                                                   Type="@item.PropertyTypeName" Distinct="@item.DistrictName" Area="@item.Area.ToString()" id="@item.Id" >
+                                </RealEstate.Web.Client.Components.Property>
+                            }
+                        }
+
+                       
 
                         <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
                             <a class="btn btn-primary py-3 px-5" href="/sale">Виж повече имоти</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-2" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-2.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Villa</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-3.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Office</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-4.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Building</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-5.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Home</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-6.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Shop</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
-                        </div>
-                    </div>
-                </div>
-                <div id="tab-3" class="tab-pane fade show p-0">
-                    <div class="row g-4">
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-1.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Appartment</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-2.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Villa</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-3.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Office</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-4.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Building</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-5.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Sell</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Home</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <div class="property-item rounded overflow-hidden">
-                                <div class="position-relative overflow-hidden">
-                                    <a href=""><img class="img-fluid" src="img/property-6.jpg" alt=""></a>
-                                    <div class="bg-primary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">For Rent</div>
-                                    <div class="bg-white rounded-top text-primary position-absolute start-0 bottom-0 mx-4 pt-1 px-3">Shop</div>
-                                </div>
-                                <div class="p-4 pb-0">
-                                    <h5 class="text-primary mb-3">$12,345</h5>
-                                    <a class="d-block h5 mb-2" href="">Golden Urban House For Sell</a>
-                                    <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
-                                </div>
-                                <div class="d-flex border-top">
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i>1000 Sqft</small>
-                                    <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i>3 Bed</small>
-                                    <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>2 Bath</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 text-center">
-                            <a class="btn btn-primary py-3 px-5" href="">Browse More Property</a>
                         </div>
                     </div>
                 </div>
@@ -444,9 +211,9 @@
                         <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
                             <div class="mb-4">
                                 <h1 class="mb-3">Свържете се с наш сертифициран агент</h1>
-                                <p>Eirmod sed ipsum dolor sit rebum magna erat. Tempor lorem kasd vero ipsum sit sit diam justo sed vero dolor duo.</p>
+                                <p>Свържете се с наш сертифициран агент или с нашият офис за да намерим мечтаният от вас дом.</p>
                             </div>
-                            <a href="" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Обадете се</a>
+                            <a href="tel:+496170961709" class="btn btn-primary py-3 px-4 me-2"><i class="fa fa-phone-alt me-2"></i>Обадете се</a>
 
                         </div>
                     </div>
@@ -460,13 +227,13 @@
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h1 class="mb-3">Нашите топ- агенти</h1>
-                <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+
             </div>
             <div class="row g-4">
-                <RealEstate.Web.Client.Components.Agent Name="Petq Petrova" ImgUrl="img/team-1.jpg"></RealEstate.Web.Client.Components.Agent>
-                <RealEstate.Web.Client.Components.Agent Name="Nesho Neshev" ImgUrl="img/team-2.jpg"></RealEstate.Web.Client.Components.Agent>
-                <RealEstate.Web.Client.Components.Agent Name="Vanq Ivanova" ImgUrl="img/team-3.jpg"></RealEstate.Web.Client.Components.Agent>
-                <RealEstate.Web.Client.Components.Agent Name="Ivan Ivanov" ImgUrl="img/team-4.jpg"></RealEstate.Web.Client.Components.Agent>
+                <RealEstate.Web.Client.Components.Agent Name="Петя Петрова" ImgUrl="img/team-1.jpg"></RealEstate.Web.Client.Components.Agent>
+                <RealEstate.Web.Client.Components.Agent Name="Нешо Нешев" ImgUrl="img/team-2.jpg"></RealEstate.Web.Client.Components.Agent>
+                <RealEstate.Web.Client.Components.Agent Name="Ваня Иванова" ImgUrl="img/team-3.jpg"></RealEstate.Web.Client.Components.Agent>
+                <RealEstate.Web.Client.Components.Agent Name="Иван Иванов" ImgUrl="img/team-4.jpg"></RealEstate.Web.Client.Components.Agent>
 
             </div>
         </div>
@@ -477,41 +244,39 @@
         <div class="container">
             <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h1 class="mb-3">Клиентите за нас!</h1>
-                <p>Eirmod sed ipsum dolor sit rebum labore magna erat. Tempor ut dolore lorem kasd vero ipsum sit eirmod sit. Ipsum diam justo sed rebum vero dolor duo.</p>
+
             </div>
             <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
                 <div class="testimonial-item bg-light rounded p-3">
                     <div class="bg-white border rounded p-4">
-                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 45px; height: 45px;">
-                            <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Client Name</h6>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item bg-light rounded p-3">
-                    <div class="bg-white border rounded p-4">
-                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
-                        <div class="d-flex align-items-center">
-                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg" style="width: 45px; height: 45px;">
-                            <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Client Name</h6>
-                                <small>Profession</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-item bg-light rounded p-3">
-                    <div class="bg-white border rounded p-4">
-                        <p>Tempor stet labore dolor clita stet diam amet ipsum dolor duo ipsum rebum stet dolor amet diam stet. Est stet ea lorem amet est kasd kasd erat eos</p>
+                        <p>Впечатлен съм от обслужването и отношението. Екипът беше до мен през цялото време, когато имах нужда от тях. Това трябва да е стандарт! </p>
                         <div class="d-flex align-items-center">
                             <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-3.jpg" style="width: 45px; height: 45px;">
                             <div class="ps-3">
-                                <h6 class="fw-bold mb-1">Client Name</h6>
-                                <small>Profession</small>
+                                <h6 class="fw-bold mb-1">Галин</h6>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-3">
+                    <div class="bg-white border rounded p-4">
+                        <p>Изключителни професионалисти. Работят с усмивка.</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-2.jpg" style="width: 45px; height: 45px;">
+                            <div class="ps-3">
+                                <h6 class="fw-bold mb-1">Иван</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item bg-light rounded p-3">
+                    <div class="bg-white border rounded p-4">
+                        <p>Нешо е страхотен брокер!  Той искрено разбра нашия проблем и оказа помощ, за която другите дори не се замисляха.  Иска ми се да има повече такива мили и честни хора. Горещо препоръчвам</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="img/testimonial-1.jpg" style="width: 45px; height: 45px;">
+                            <div class="ps-3">
+                                <h6 class="fw-bold mb-1">Таня</h6>
                             </div>
                         </div>
                     </div>
@@ -523,5 +288,5 @@
 </div>
 @code {
 
-
+    
 }

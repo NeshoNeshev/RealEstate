@@ -13,5 +13,7 @@ namespace RealEstate.Services
         public Task<string> Update(PropertyTypeUpdateModel model);
 
         public Task Delete(string id);
+
+        public Task<List<PropertiesCountsModel>> TypesCounts();
     }
 }

@@ -8,6 +8,7 @@ using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Web.Shared.DistrictModels;
 using RealEstate.Web.Shared.PropertyTypeModels;
 using RealEstate.Web.Shared.InputModels;
+using RealEstate.Web.Shared.PropertyModels;
 
 namespace RealEstate.Web.Client.Pages
 {
@@ -35,6 +36,7 @@ namespace RealEstate.Web.Client.Pages
             }
             await base.OnInitializedAsync();
         }
+       
         private void SelectionChanged(ChangeEventArgs e)
         {
             selectedTown = e.Value.ToString();

@@ -1,139 +1,133 @@
-﻿@page "/property"
-@*@page "/property/{id}"*@
+﻿@page "/property/{id}/{Town}"
+@using RealEstate.Web.Shared.PropertyModels
 <div class="container-xxl bg-white p-0">
     <div class="container-fluid header bg-white p-0" style="margin-top: 10px">
+        @if (model != null)
+        {
+            <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
+                <div class="col-md-6 p-5 mt-lg-5">
+                    <h1 class="display-5 animated fadeIn mb-4">
 
-        <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
-            <div class="col-md-6 p-5 mt-lg-5">
-                <h1 class="display-5 animated fadeIn mb-4">
+                        <span class="text-primary">@model.PropertyTypeName</span> за  продажба, @Town, @model.DistrictName
+                    </h1>
 
-                    <span class="text-primary">Тристаен апартамент</span> за  продажба, София, кв. Бели брези
-                </h1>
-
-            </div>
-            <div class="col-md-6 animated fadeIn">
-                <div class="carousel">
-                    <button @onclick="Previous">&lt;</button>
-                    <img src="@Images[currentIndex]" alt="carousel-image" />
-                    <button @onclick="Next">&gt;</button>
+                </div>
+                <div class="col-md-6 animated fadeIn">
+                    <div class="carousel">
+                        <button @onclick="Previous">&lt;</button>
+                        <img src="@Images[currentIndex]" alt="carousel-image" />
+                        <button @onclick="Next">&gt;</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container" style="margin-top: 20px; margin-bottom: 20px">
-            <div class="bg-light rounded p-3">
-                <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
-                    <div class="row">
-                        <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
-                            <p class="c-secondary">
-                                Площ:
-                                <span class="bold c-secondary">
-                                    67 кв.м.
-                                </span>
-                            </p>
-                        </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
-                            <p class="c-secondary">
-                                Тип Имот:
-                                <span class="bold c-secondary">
-                                    Тристаен апартамент
-                                </span>
-                            </p>
-                        </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
-                            <p class="c-secondary">
-                                Етаж:
-                                <span class="bold c-secondary">
-                                    12
-                                </span>
-                            </p>
-                        </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
-                            <p class="c-secondary">
-                                Ниво на обзавеждане:
-                                <span class="bold c-secondary">
-                                    Напълно обзаведен
-                                </span>
-                            </p>
-                        </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
-                            <p class="c-secondary">
-                                Отопление:
-                                <span class="bold c-secondary">
-                                    ТЕЦ
-                                </span>
-                            </p>
+            <div class="container" style="margin-top: 20px; margin-bottom: 20px">
+                <div class="bg-light rounded p-3">
+                    <div class="bg-white rounded p-4" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                        <div class="row">
+                            <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <p class="c-secondary">
+                                    Площ:
+                                    <span class="bold c-secondary">
+                                        @model.Area кв.м.
+                                    </span>
+                                </p>
+                            </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <p class="c-secondary">
+                                    Тип Имот:
+                                    <span class="bold c-secondary">
+                                        @model.PropertyTypeName
+                                    </span>
+                                </p>
+                            </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <p class="c-secondary">
+                                    Етаж:
+                                    <span class="bold c-secondary">
+                                        @model.Floor
+                                    </span>
+                                </p>
+                            </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <p class="c-secondary">
+                                    Ниво на обзавеждане:
+                                    <span class="bold c-secondary">
+                                        @model.FurnishedLevel
+                                    </span>
+                                </p>
+                            </div> <div class="col-sm-12 col-sm-12 col-md-6 col-lg-6">
+                                <p class="c-secondary">
+                                    Отопление:
+                                    <span class="bold c-secondary">
+                                        @model.Heating
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <p>
+                               @model.Description                            </p>
                         </div>
                     </div>
-                    <div class="row">
-                        <p>
-                            Разпределение: Две спални. Всекидневна Кухненски бокс с трапезария Баня с тоалетна,. 2 бр. тераси.
-
-
-                            <br><br>
-                            Сграда построена 1987г тип ЕПК, между бул. България и ул. Битоля с поддържани общи части и контролиран достъп.&nbsp;Два бр. Асансьори, и функционално ра<span class="moreellipses" style="display: none;">...&nbsp;</span><span class="morecontent" style="display: inline;">
-                                <span>
-                                    пределение.&nbsp;
-
-
-                                    <br><br>
-                                    Между бул. България и ул. Битоля, на пешеходно разтояние от метростанция бул. България
-
-
-                                    <br><br>
-                                    Жилище с&nbsp; &nbsp;Югозападно изложение с много светлина.&nbsp; На пешеходно разтояние от метрстанция бул. България, трамвай 7,27.Автобусни спирки, училища и детски градини.&nbsp;
-
-                                    Към апартамента има мазе и таванско помещение.
-
-
-                                    <br><br>
-                                    Обади се СЕГА и цитирай този код 607815.
-                                </span>
-                            </span>
-                        </p>
-                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container" style="margin-top: 20px; margin-bottom: 20px">
-            <div class="row">
-                <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <iframe class="position-relative rounded w-100 h-100"
+            <div class="container" style="margin-top: 20px; margin-bottom: 20px">
+                <div class="row">
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <iframe class="position-relative rounded w-100 h-100"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sBurgas%2C%20Bulgaria!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
                             frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
                             tabindex="0"></iframe>
+                    </div>
+                    <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <form>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            </div>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
+
             </div>
-           
-        </div>
-   
+
+        }
     </div>
 </div>
 @code {
 
     [Parameter]
-    public string PropertyId { get; set; }
-    private List<string> Images = new List<string>
-    {
-        "img/property-1.jpg",
-        "img/property-2.jpg",
-        "img/property-3.jpg"
-    };
+    public string? Id { get; set; }
+    [Parameter]
+    public string? Town { get; set; }
+    private List<string> Images = new();
+    private PropertyViewModel model = new();
     private int currentIndex = 0;
+    protected override async Task OnInitializedAsync()
+    {
+        Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI.NoAuthenticationClient");
+        try
+        {
+            var response = await Http.GetFromJsonAsync<PropertyViewModel>($"Property/GetPropertiyById?Id={Id}");
+            foreach (var item in response.ImagesUrls)
+            {
+                Images.Add(item.Url);
+            }
+            model = response;
+        }
+        catch (Exception)
+        {
 
+            throw;
+        }
+    }
     private void Next()
     {
         currentIndex = (currentIndex + 1) % Images.Count;

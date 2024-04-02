@@ -35,6 +35,14 @@ namespace RealEstate.Services
             var town = await this.dbContext.Towns.Where(x => x.Id == townId).To<TownViewModel>().FirstOrDefaultAsync();
             return town;
         }
+        public async Task<string> GetTownByDistrictId(string districtId)
+        {
+            var district = await this.dbContext.Districts.Where(x => x.Id == districtId).FirstOrDefaultAsync();
+
+            var townName = await this.dbContext.Towns.Where(x => x.Id == district.TownId).FirstOrDefaultAsync();
+            
+            return townName.Name;
+        }
         public async Task<string> GetTownId(string id)
         {
 
