@@ -4,7 +4,7 @@
 
 <PageTitle>Index</PageTitle>
 
-<div class="container-xxl bg-white p-0">
+<div class="container-xxl bg-white p-0" id="1">
 
     <div class="container-fluid header bg-white p-0">
         <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
@@ -13,7 +13,7 @@
                     Намерете
                     <span class="text-primary">перфектен дом</span> за вас и вашето семейство
                 </h1>
-
+              @*  <iframe src=@($"https://maps.google.com/maps?q=%20{model?.Address},%20{model?.TownName}&t=&z=13&ie=UTF8&iwloc=&output=embed") width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>*@
             </div>
             <div class="col-md-6 animated fadeIn">
                 <div class="owl-carousel header-carousel">
@@ -29,7 +29,7 @@
     <!-- Search Start -->
     <div class="container-fluid bg-primary mb-5 wow fadeIn">
         <div class="container">
-            <EditForm Model="@inputModel" OnValidSubmit="@OnSubmit" class="form-group" enctype="multipart/form-data">
+            <EditForm Model="@inputModel" EditContext="@_editContext" OnValidSubmit="@OnSubmit" class="form-group" enctype="multipart/form-data">
                 <DataAnnotationsValidator />
                 <div class="row g-2">
                     <div class="col-md-10">
@@ -41,64 +41,74 @@
                             <div class="col-md-3 form-group">
                                 <span style="color: white"> Град</span>
                                 <select class="form-select border-0 py-3" @onchange="SelectionChanged" value="@inputModel.selectedTown">
-                                    <ValidationMessage For="@(() => inputModel.selectedTown)" />
-                                    <option disabled selected value="">Изберете град</option>
+
+                                    <option  selected value="">Изберете град</option>
                                     @foreach (var town in indexModel.Towns)
                                     {
+                                                                            
                                         <option value="@town.Id">@town.Name</option>
                                     }
                                 </select>
+                                <ValidationMessage For="@(() => inputModel.selectedTown)" />
                             </div>
                             <div class="col-md-3">
                                 <span style="color: white"> Квартал</span>
                                 <select class="form-select border-0 py-3" @bind="@inputModel.selectedDistrictId">
-                                    <ValidationMessage For="@(() => inputModel.selectedDistrictId)" />
+                                   
                                     <option selected disabled>Изберете квартал</option>
                                     @foreach (var district in districts)
                                     {
                                         <option value="@district.Id">@district.Name</option>
                                     }
                                 </select>
+                                 <ValidationMessage For="@(() => inputModel.selectedDistrictId)" />
                             </div>
                             <div class="col-md-3">
                                 <span style="color: white"> Тип</span>
                                 <select class="form-select border-0 py-3" @bind="@inputModel.selectedTypeId">
-                                    <ValidationMessage For="@(() => inputModel.selectedTypeId)" />
+                                   
                                     <option selected disabled>Тип имот</option>
                                     @foreach (var type in indexModel.Types)
                                     {
                                         <option value="@type.Id">@type.Name</option>
                                     }
                                 </select>
+                                 <ValidationMessage For="@(() => inputModel.selectedTypeId)" />
                             </div>
                         </div>
                         <div class="row g-2" style="margin-bottom: 20px;">
                             <div class="col-md-3">
                                 <span style="color: white"> Отопление</span>
                                 <select class="form-select border-0 py-3" @bind="@inputModel.heating">
+                                    <option selected value="">Отопление</option>
                                     @foreach (var heating in heatings)
                                     {
                                         <option value="@heating">@heating</option>
                                     }
                                 </select>
+                                 <ValidationMessage For="@(() => inputModel.heating)" />
                             </div>
                             <div class="col-md-3">
                                 <span style="color: white"> Обзавеждане</span>
-                                <select class="form-select border-0 py-3" @bind="@inputModel.furnitureLevel">
+                                <select required class="form-select border-0 py-3" @bind="@inputModel.furnitureLevel">
+                                    <option selected value="">Обзавеждане</option>
                                     @foreach (var level in furnitureLevel)
                                     {
                                         <option value="@level">@level</option>
                                     }
                                 </select>
+                                 <ValidationMessage For="@(() => inputModel.furnitureLevel)" />
                             </div>
                             <div class="col-md-3 form-group">
                                 <span style="color: white"> Площ от</span>
-                                <ValidationMessage For="@(() => inputModel.from)" />
+                               
                                 <input type="text" class="form-control border-0 py-3" @bind="@inputModel.from">
+                                 <ValidationMessage For="@(() => inputModel.from)" />
                             </div>
                             <div class="col-md-3" form-group>
                                 <span style="color: white"> Площ до</span>
-                                <input type="text" class="form-control border-0 py-3" placeholder="ID на имота" @bind="@inputModel.to">
+                                <input type="text" class="form-control border-0 py-3" @bind="@inputModel.to">
+                                 <ValidationMessage For="@(() => inputModel.to)" />
                             </div>
                         </div>
 
@@ -169,13 +179,11 @@
                 <div class="col-lg-6">
                     <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
                         <h1 class="mb-3">Топ имоти</h1>
-                        <p>Разгледайте нашите топ имоти.</p>
+                        <p>Нашите топ имоти.</p>
                     </div>
                 </div>
-
             </div>
             <div class="tab-content">
-
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         @if (indexModel?.Properties != null)
@@ -187,12 +195,6 @@
                                 </RealEstate.Web.Client.Components.Property>
                             }
                         }
-
-                       
-
-                        <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                            <a class="btn btn-primary py-3 px-5" href="/sale">Виж повече имоти</a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -287,6 +289,6 @@
     <RealEstate.Web.Client.Components.Footer></RealEstate.Web.Client.Components.Footer>
 </div>
 @code {
-
+    private EditContext _editContext;
     
 }

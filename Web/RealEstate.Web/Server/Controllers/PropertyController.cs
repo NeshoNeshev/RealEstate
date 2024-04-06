@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RealEstate.Services;
+using RealEstate.Web.Shared.InputModels;
 using RealEstate.Web.Shared.PropertyModels;
 using RealEstate.Web.Shared.ViewModels;
 
@@ -20,6 +21,15 @@ namespace RealEstate.Web.Server.Controllers
             var model = await this.propertyService.Get(Id);
 
             return model;
+        }
+        [HttpPost("SearchProperties")]
+        public async Task<IEnumerable<PropertyViewModel>> SearchProperties([FromBody] IndexInputModel model)
+        {
+            var response = await this.propertyService.SearchProperties(model);
+
+            return response;
+
+            
         }
     }
 }

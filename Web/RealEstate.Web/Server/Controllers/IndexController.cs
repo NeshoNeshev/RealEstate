@@ -37,6 +37,6 @@ namespace RealEstate.Web.Server.Controllers
             indexModel.Types = await this.propertyTypeService.GetAll<PropertyTypeViewModel>(null, false);
             return indexModel;
         }
-       
+        
     }
 }

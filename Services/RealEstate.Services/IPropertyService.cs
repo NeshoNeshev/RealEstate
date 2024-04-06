@@ -1,10 +1,12 @@
 ﻿using RealEstate.Web.Shared;
+using RealEstate.Web.Shared.InputModels;
 using RealEstate.Web.Shared.PropertyModels;
 
 namespace RealEstate.Services
 {
     public interface IPropertyService
     {
+        public Task<IEnumerable<PropertyViewModel>> SearchProperties(IndexInputModel model);
         public Task<string> Create(PropertyInputModel model);
 
         public Task<bool> Delete(string properyId);

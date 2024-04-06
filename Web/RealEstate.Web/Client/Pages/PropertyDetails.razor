@@ -1,16 +1,24 @@
 ﻿@page "/property/{id}/{Town}"
+
 @using RealEstate.Web.Shared.PropertyModels
 <div class="container-xxl bg-white p-0">
     <div class="container-fluid header bg-white p-0" style="margin-top: 10px">
-        @if (model != null)
+        @if (model == null)
+        {
+            <RealEstate.Web.Client.Components.Spiner></RealEstate.Web.Client.Components.Spiner>
+        }
+        else
         {
             <div class="row g-0 align-items-center flex-column-reverse flex-md-row">
                 <div class="col-md-6 p-5 mt-lg-5">
-                    <h1 class="display-5 animated fadeIn mb-4">
+                    @if (Town != null)
+                    {
+                        <h1 class="display-5 animated fadeIn mb-4">
 
-                        <span class="text-primary">@model.PropertyTypeName</span> за  продажба, @Town, @model.DistrictName
-                    </h1>
+                            <span class="text-primary">@model.PropertyTypeName</span> за  продажба, @Town, @model.DistrictName
+                        </h1>
 
+                    }
                 </div>
                 <div class="col-md-6 animated fadeIn">
                     <div class="carousel">
@@ -63,7 +71,8 @@
                         </div>
                         <div class="row">
                             <p>
-                               @model.Description                            </p>
+                                @model.Description
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -71,27 +80,21 @@
             <div class="container" style="margin-top: 20px; margin-bottom: 20px">
                 <div class="row">
                     <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <iframe class="position-relative rounded w-100 h-100"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3001156.4288297426!2d-78.01371936852176!3d42.72876761954724!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4ccc4bf0f123a5a9%3A0xddcfc6c1de189567!2sBurgas%2C%20Bulgaria!5e0!3m2!1sen!2sbd!4v1603794290143!5m2!1sen!2sbd"
-                            frameborder="0" style="min-height: 400px; border:0;" allowfullscreen="" aria-hidden="false"
-                            tabindex="0"></iframe>
+
+                        <iframe src=@($"https://maps.google.com/maps?q=%20{address},%20{Town}&t=&z=13&ie=UTF8&iwloc=&output=embed") width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                     <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                         <form>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                <label for="exampleInputEmail1">Имейл</label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Въведете имейл">
+                                <small id="emailHelp" class="form-text text-muted">Никога няма да споделяме вашия имейл с никой друг.</small>
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                <label for="exampleInputPassword1">Парола</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Парола">
                             </div>
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary" style="margin-top: 20px">Изпрати</button>
                         </form>
                     </div>
                 </div>
@@ -100,6 +103,7 @@
 
         }
     </div>
+    <RealEstate.Web.Client.Components.Footer></RealEstate.Web.Client.Components.Footer>
 </div>
 @code {
 
@@ -110,6 +114,7 @@
     private List<string> Images = new();
     private PropertyViewModel model = new();
     private int currentIndex = 0;
+    string address = "Александровска";
     protected override async Task OnInitializedAsync()
     {
         Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI.NoAuthenticationClient");

@@ -40,6 +40,8 @@ namespace RealEstate.Web.Client.Pages
         private void SelectionChanged(ChangeEventArgs e)
         {
             selectedTown = e.Value.ToString();
+            inputModel.selectedTown = selectedTown;
+            
             LoadDistricts(selectedTown);
             // You can add any additional logic here upon selection change
         }
@@ -49,6 +51,7 @@ namespace RealEstate.Web.Client.Pages
             var selectedTown = indexModel.Towns.FirstOrDefault(town => town.Id == townId);
             if (selectedTown != null)
             {
+               
                 districts = selectedTown.Districts.ToList();
             }
             else
@@ -58,6 +61,11 @@ namespace RealEstate.Web.Client.Pages
         }
         private async Task OnSubmit()
         {
+            if (inputModel.propertyId != null)
+            {
+                this.NavigationManager.NavigateTo($"property/{inputModel.propertyId}");
+            }
+            this.NavigationManager.NavigateTo($"sale/{inputModel.selectedDistrictId}/{inputModel.selectedTypeId}/{inputModel.heating}/{inputModel.furnitureLevel}/{inputModel.selectedTown}/{inputModel.from}/{inputModel.to}");
             //var response = await Http.PostAsJsonAsync("Administrator/CreateLawFirm", model);
             //if (response.IsSuccessStatusCode)
             //{

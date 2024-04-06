@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Primitives;
 using RealEstate.Data;
 using RealEstate.Data.Migrations;
 using RealEstate.Data.Models.ApplicationModels;
@@ -7,6 +8,7 @@ using RealEstate.Data.Models.DatabaseModels;
 using RealEstate.Data.Models.Enumerations;
 using RealEstate.Services.Mapping;
 using RealEstate.Web.Shared;
+using RealEstate.Web.Shared.InputModels;
 using RealEstate.Web.Shared.PropertyModels;
 using System;
 using System.Drawing;
@@ -172,6 +174,15 @@ namespace RealEstate.Services
             var crc32Hex = Convert.ToHexString(crc32);
 
             return crc32Hex;
+        }
+        public async Task<IEnumerable<PropertyViewModel>> SearchProperties(IndexInputModel model) 
+        {
+           
+            var result = await this.dbContext.Towns.
+                Where(x => x.Id == model.selectedTown)
+                .SelectMany(x => x.Districts.Where(x => x.Id == model.selectedDistrictId)).SelectMany(x => x.Propertys.Where(x => x.PropertyTypeId == model.selectedTypeId)
+                .Where(x=>x.Area >= double.Parse(model.from) && x.Area <= double.Parse(model.to))).To<PropertyViewModel>().ToListAsync() ;
+            return result;
         }
         private async Task AddTableImagesUrls(List<string> paths, string propertyId)
         {
