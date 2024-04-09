@@ -59,7 +59,7 @@ builder.Services.AddTransient<IPropertyService, PropertyService>();
 builder.Services.AddTransient<IPropertyInspectionService, PropertyInspectionService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IPropertyTypeService, PropertyTypeService>();
-builder.Services.AddTransient<INotificationService, NotificationService>();
+builder.Services.AddTransient<INotificationService, NotificationsService>();
 // ��� �� ������ ����
 var app = builder.Build();
 

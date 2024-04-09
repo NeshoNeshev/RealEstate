@@ -1,4 +1,5 @@
-﻿@page "/property/{id}/{Town}"
+﻿@page "/property/{id}"
+@page "/property/{id}/{Town}"
 
 @using RealEstate.Web.Shared.PropertyModels
 <div class="container-xxl bg-white p-0">
@@ -14,10 +15,15 @@
                     @if (Town != null)
                     {
                         <h1 class="display-5 animated fadeIn mb-4">
-
                             <span class="text-primary">@model.PropertyTypeName</span> за  продажба, @Town, @model.DistrictName
                         </h1>
 
+                    }
+                    else
+                    {
+                        <h1 class="display-5 animated fadeIn mb-4">
+                            <span class="text-primary">@model.PropertyTypeName</span> за  продажба, в квартал @model.DistrictName
+                        </h1>
                     }
                 </div>
                 <div class="col-md-6 animated fadeIn">
@@ -84,18 +90,19 @@
                         <iframe src=@($"https://maps.google.com/maps?q=%20{address},%20{Town}&t=&z=13&ie=UTF8&iwloc=&output=embed") width="100%" height="380" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                     <div class="col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <form>
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Имейл</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Въведете имейл">
-                                <small id="emailHelp" class="form-text text-muted">Никога няма да споделяме вашия имейл с никой друг.</small>
+                        <div class="bg-light rounded p-3">
+                            <div class="row">
+                                <p>Свържете се с нас</p>
                             </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Парола</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Парола">
+                            <div class="d-flex align-items-center bg-white rounded p-3" style="border: 1px dashed rgba(0, 185, 142, .3)">
+                                <div class="icon me-3" style="width: 45px; height: 45px;">
+                                    <i class="fa fa-phone-alt text-primary"></i>
+                                </div>
+                                <span>
+                                    <a href="tel:+0897212403" style="text-decoration: none">0897 212 403</a>
+                                </span>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="margin-top: 20px">Изпрати</button>
-                        </form>
+                        </div>
                     </div>
                 </div>
 
@@ -112,7 +119,7 @@
     [Parameter]
     public string? Town { get; set; }
     private List<string> Images = new();
-    private PropertyViewModel model = new();
+    private PropertyViewModel model { get; set; }
     private int currentIndex = 0;
     string address = "Александровска";
     protected override async Task OnInitializedAsync()

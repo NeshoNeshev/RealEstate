@@ -2,19 +2,6 @@
 @using System.ComponentModel.DataAnnotations
 @using RealEstate.Web.Shared.PropertyModels
 <div class="container-xxl bg-white p-0">
-    <!-- Spinner Start -->
-    @* <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-    <span class="sr-only">Loading...</span>
-    </div>
-    </div>*@
-    <!-- Spinner End -->
-    <!-- Navbar Start -->
-    <!-- Navbar End -->
-    <!-- Header Start -->
-    <!-- Search Start -->
-    <!-- Search End -->
-    <!-- About Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="row g-5 align-items-center">
@@ -37,8 +24,6 @@
             </div>
         </div>
     </div>
-    <!-- About End -->
-    <!-- Call to Action Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="bg-light rounded p-3">
@@ -98,14 +83,11 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
-
                         <div class="col-lg-6">
                             <h6>
                                 Попълнете формата или се свържете с нас на
-                                0888 11 22 00
+                                 <span> <a href="tel:+0897212403" style="text-decoration: none">0897 212 403</a></span>
                             </h6>
                             <EditForm EditContext="@_editContext" OnValidSubmit="HandleOnValidSubmit">
                                 <DataAnnotationsValidator />
@@ -171,8 +153,6 @@
             </div>
         </div>
     </div>
-    <!-- Call to Action End -->
-    <!-- Team Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="bg-light rounded p-3">
@@ -184,7 +164,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px; border: 1px dashed rgba(0, 185, 142, .3)">
                                 <div class="card-body">
-                                    <p>“Бях пуснала обява за продажба и ми се обади консултант на Адрес. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Адрес."</p>
+                                    <p>“Бях пуснала обява за продажба и ми се обади консултант на Adresimo. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Adresimo."</p>
                                     <p style="font-weight: bold;">
                                         Таня Георгиева<br>
                                         София
@@ -196,7 +176,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
                                 <div class="card-body">
-                                    <p>“Бях пуснала обява за продажба и ми се обади консултант на Адрес. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Адрес."</p>
+                                    <p>“Бях пуснала обява за продажба и ми се обади консултант на Adresimo. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Adresimo."</p>
                                     <p style="font-weight: bold;">
                                         Таня Георгиева<br>
                                         София
@@ -208,7 +188,7 @@
                         <div class="col-lg-4 col-sm-6">
                             <div class="card" style="box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;">
                                 <div class="card-body">
-                                    <p>“Бях пуснала обява за продажба и ми се обади консултант на Адрес. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Адрес."</p>
+                                    <p>“Бях пуснала обява за продажба и ми се обади консултант на Adresimo. Обеща ми много неща, изпълни ги и даже успя да продаде апартамента ми за по-малко от месец. Случи се, защото той ми помогна да определя точната цена, иначе щях да сигурно да чакам цяла година. Ако продавам пак, със сигурност ще се обадя на Adresimo."</p>
                                     <p style="font-weight: bold;">
                                         Таня Георгиева<br>
                                         София
@@ -250,9 +230,6 @@
             </div>
         </div>
     </div>
-    <!-- Team End -->
-    <!-- Footer Start -->
-
     <RealEstate.Web.Client.Components.Footer></RealEstate.Web.Client.Components.Footer>
 </div>
 <style>

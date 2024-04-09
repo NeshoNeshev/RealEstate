@@ -53,6 +53,13 @@ namespace RealEstate.Services
             var result = await query.To<T>().ToListAsync();
             return result;
         }
+        public async Task<PropertyTypeViewModel> GetTypeByNameAsync(string name)
+        {
+
+            var type = await this.dbContext.PropertyTypes.Where(x => x.Name.ToLower() == name.ToLower()).To<PropertyTypeViewModel>().FirstOrDefaultAsync();
+
+            return type;
+        }
         public async Task<PropertyTypeViewModel> Get(string id)
         {
 

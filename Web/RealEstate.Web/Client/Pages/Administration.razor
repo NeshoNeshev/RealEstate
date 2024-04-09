@@ -6,58 +6,43 @@
         <div class="container-xxl bg-white p-0">
             <div class="row g-2">
                 <div class="col">
-                    <h2 class="text-center">Administration</h2>
+                    <h2 class="text-center">Администрация</h2>
                     @if (notifi == null)
                     {
-                        <p>null</p>
-                    }else
+                        <RealEstate.Web.Client.Components.Spiner></RealEstate.Web.Client.Components.Spiner>
+                    }
+                    else
                     {
                         <Toasts class="p-3" Messages="messages" Placement="ToastsPlacement.TopRight" />
                         <Toasts class="p-3" Messages="requests" Placement="ToastsPlacement.TopLeft" />
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-md-6">
-                                <div class="d-grid gap-2">
-                                    <Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="() => ShowRequest(ToastType.Secondary)">
-                                        Заявки <Badge Color="BadgeColor.Danger">@notifi?.Requests.Count()</Badge>
-                                    </Button>
-                                </div>
+                                @if (notifi?.Requests != null)
+                                {
+                                    <div class="d-grid gap-2">
+                                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="() => ShowRequest(ToastType.Secondary)">
+                                            Заявки <Badge Color="BadgeColor.Danger">@notifi?.Requests.Count()</Badge>
+                                        </Button>
+                                    </div>
+                                }
                             </div>
                             <div class="col-md-6">
-                                <div class="d-grid gap-2">
-                                    <Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="() => ShowMessage(ToastType.Secondary)">
-                                        Съобщения <Badge Color="BadgeColor.Danger">@notifi?.Messages.Count()</Badge>
-                                    </Button>
+                                @if (notifi?.Messages != null)
+                                {
+                                    <div class="d-grid gap-2">
+                                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" @onclick="() => ShowMessage(ToastType.Secondary)">
+                                            Съобщения <Badge Color="BadgeColor.Danger">@notifi?.Messages.Count()</Badge>
+                                        </Button>
 
-                                </div>
+                                    </div>
+                                }
+
                             </div>
                         </div>
                     }
-                   
-
-
                 </div>
             </div>
             <div class="row" style="margin-bottom: 20px;">
-                <div>
-                    <BarChart @ref="barChart" Width="800" Height="400" />
-                </div>
-                <div class="row">
-                    <div class="col-md-2">
-                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await RandomizeAsync()"> Randomize </Button>
-                    </div>
-                    <div class="col-md-2">
-                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await AddDatasetAsync()"> Add Dataset </Button>
-                    </div>
-                    <div class="col-md-2">
-                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await AddDataAsync()">Add Data</Button>
-                    </div>
-                    <div class="col-md-2">
-                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await ShowHorizontalBarChartAsync()">Horizontal Bar Chart</Button>
-                    </div>
-                    <div class="col-md-2">
-                        <Button Type="ButtonType.Button" Color="ButtonColor.Primary" Size="Size.Medium" @onclick="async () => await ShowVerticalBarChartAsync()">Vertical Bar Chart</Button>
-                    </div>
-                </div>
             </div>
         </div>
 

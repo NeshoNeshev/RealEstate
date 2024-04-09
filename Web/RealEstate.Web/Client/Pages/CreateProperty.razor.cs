@@ -20,7 +20,7 @@ namespace RealEstate.Web.Client.Pages
         string message = "InputFile";
         bool isDisabled = false;
         private PropertyInputModel inputModel = new PropertyInputModel();
-        private IndexViewModel? indexModel;
+        private IndexViewModel? indexModel { get; set; }
         private List<PropertyViewModel> propertyViewModels = new();
         private List<DistrictViewModel> districts = new List<DistrictViewModel>();
         private List<string>? heatings = new List<string>() { "ТЕЦ", "Газ", "Друго" };
@@ -41,6 +41,22 @@ namespace RealEstate.Web.Client.Pages
                 exception.Redirect();
             }
             await base.OnInitializedAsync();
+        }
+        private async void ToggleActive(string? Id, bool isActive)
+        {
+            if (Id != null)
+            {
+                if (isActive == true)
+                {
+                    await Http.PostAsJsonAsync<string>("/Administration/RecoverProperty", Id);
+                    //RecoverProperty
+                }
+                else
+                {
+                    await Http.PostAsJsonAsync<string>("/Administration/DeleteProperty", Id);
+                }
+                
+            }
         }
         private void ChangeStatus(bool status)
         {

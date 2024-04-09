@@ -33,6 +33,13 @@ namespace RealEstate.Services
             var result = await query.To<T>().ToListAsync();
             return result;
         }
+        public async Task<IEnumerable<T>> GetAll<T>()
+        {
+            IQueryable<Property> query = this.dbContext.Properties.Where(x => x.IsDeleted == false);
+
+            var result = await query.To<T>().ToListAsync();
+            return result;
+        }
         public async Task<IEnumerable<T>> GetTopProperties<T>(int? count = null)
         {
             IQueryable<Property> query = this.dbContext.Properties.Where(x => x.IsDeleted == false);
@@ -74,6 +81,23 @@ namespace RealEstate.Services
             };
             await this.dbContext.Messages.AddAsync(request);
             await this.dbContext.SaveChangesAsync();
+        }
+        public async Task Recover(string id) 
+        {
+            var property = await this.dbContext.Properties.IgnoreQueryFilters().Where(x=>x.IsDeleted == true).FirstOrDefaultAsync(x=>x.Id == id);
+           
+            if (property != null)
+            {
+                property.IsDeleted = false;
+                property.DeletedOn = null;
+                this.dbContext.Update(property);
+                await this.dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+            
         }
         public async Task<string> Create(PropertyInputModel model)
         {
@@ -181,7 +205,15 @@ namespace RealEstate.Services
             var result = await this.dbContext.Towns.
                 Where(x => x.Id == model.selectedTown)
                 .SelectMany(x => x.Districts.Where(x => x.Id == model.selectedDistrictId)).SelectMany(x => x.Propertys.Where(x => x.PropertyTypeId == model.selectedTypeId)
-                .Where(x=>x.Area >= double.Parse(model.from) && x.Area <= double.Parse(model.to))).To<PropertyViewModel>().ToListAsync() ;
+                .Where(x=>x.Area >= double.Parse(model.from) && x.Area <= double.Parse(model.to) && x.Floor == model.Floor)).To<PropertyViewModel>().ToListAsync() ;
+            return result;
+        }
+
+        public async Task<IEnumerable<PropertyViewModel>> SearchPropertiesByType(string input)
+        {
+            var propertyType = await this.propertyTypeService.GetTypeByNameAsync(input);
+            var result = await this.dbContext.Properties.Where(x => x.PropertyTypeId == propertyType.Id).To<PropertyViewModel>().ToListAsync();
+               
             return result;
         }
         private async Task AddTableImagesUrls(List<string> paths, string propertyId)

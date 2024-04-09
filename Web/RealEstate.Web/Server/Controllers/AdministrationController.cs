@@ -31,12 +31,20 @@ namespace RealEstate.Web.Server.Controllers
             var imagesPath = new List<string>();
             foreach (var file in files)
             {
+                int dotIndex = file.fileName.LastIndexOf('.');
 
-                var buf = Convert.FromBase64String(file.base64data);
-                var path = Path.Combine(env.ContentRootPath, "wwwroot/images", file.fileName);
-                await System.IO.File.WriteAllBytesAsync(path, buf);
-                var relativePath = $"images/{file.fileName}";//Path.Combine("images", file.fileName);310612
-                imagesPath.Add(relativePath);
+                if (dotIndex != -1 && dotIndex < file.fileName.Length - 1)
+                {
+                    // Use Substring to get the file extension
+                    string fileExtension = file.fileName.Substring(dotIndex); // Include the dot in the result
+                    var fileName = Guid.NewGuid().ToString();
+                    var buf = Convert.FromBase64String(file.base64data);
+                    var path = Path.Combine(env.ContentRootPath, "wwwroot/images", fileName+fileExtension);
+                    await System.IO.File.WriteAllBytesAsync(path, buf);
+                    var relativePath = $"images/{fileName + fileExtension}";//Path.Combine("images", file.fileName);310612
+                    imagesPath.Add(relativePath);
+                }
+               
 
             }
             return imagesPath;
@@ -68,6 +76,33 @@ namespace RealEstate.Web.Server.Controllers
 
                 throw;
             }
+        }
+        [HttpPost("RecoverProperty")]
+        public async Task RecoverProperty([FromBody]string id)
+        {
+            try
+            {
+                await this.propertyService.Recover(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost("DeleteProperty")]
+        public async Task DeleteProperty([FromBody]string id)
+        {
+            try
+            {
+                await this.propertyService.Delete(id);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+           
         }
         [HttpPost("SendMesage")]
         public async Task SendMesage([FromBody] MessageModel model)

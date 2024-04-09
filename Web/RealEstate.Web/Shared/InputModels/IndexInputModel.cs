@@ -6,7 +6,8 @@ namespace RealEstate.Web.Shared.InputModels
     {
         [Required(ErrorMessage = "полето е задължително")]
         public string? selectedDistrictId { get; set; }
-       
+        [Required(ErrorMessage = "полето е задължително")]
+        public int? Floor { get; set; }
         public string? propertyId { get; set; }
         [Required(ErrorMessage = "полето е задължително")]
         public string? selectedTypeId { get; set; }

@@ -6,7 +6,7 @@
         <div class="container-xxl bg-white p-0">
             <div class="row g-2">
                 <div class="col">
-                    <h2 class="text-center">Administration</h2>
+                    <h2 class="text-center">Администрация</h2>
                 </div>
             </div>
             <div class="row" style="margin-bottom: 20px;">
@@ -28,14 +28,37 @@
                         <div class="col-md-8">
                             @if (propertyViewModels == null)
                             {
-                                <p>sdasdasd</p>
+                               <RealEstate.Web.Client.Components.Spiner></RealEstate.Web.Client.Components.Spiner>
                             }
                             else
                             {
-                                @foreach (var item in propertyViewModels)
-                                {
-                                    <p>@item.Code</p>
-                                }
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th style="color: white">ID</th>
+                                         
+                                            <th style="color: white">Цена</th>
+                                            <th style="color: white">Квадратура</th>
+                                            <th style="color: white">Етаж</th>
+                                            <th style="color: white">Продаден</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var property in propertyViewModels)
+                                        {
+                                            <tr>
+                                                <td style="color: white">@property.Id</td>
+                                  
+                                                <td style="color: white">@property.Price</td>
+                                                <td style="color: white">@property.Area</td>
+                                                <td style="color: white">@property.Floor</td>
+                                                <td>
+                                                    <input style="color:red" type="checkbox" @bind="@property.IsSolded" @onclick="() => ToggleActive(property?.Id,property.IsSolded)" />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             }
                         </div>
                         <div class="col-md-4">
@@ -63,13 +86,12 @@
                         </div>
                     </div>
                 </div>
-                <h2>adsdasda</h2>
             }
             else
             {
                 if (indexModel == null)
                 {
-                    <p>dsadas</p>
+                    <RealEstate.Web.Client.Components.Spiner></RealEstate.Web.Client.Components.Spiner>
                 }
                 else
                 {
@@ -238,3 +260,6 @@
         background-color: #f9f9f9;
     }
 </style>
+@code{
+    
+}

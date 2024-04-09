@@ -5,10 +5,10 @@ using RealEstate.Services.Mapping;
 
 namespace RealEstate.Services
 {
-    public class NotificationService : INotificationService
+    public class NotificationsService : INotificationService
     {
         private readonly ApplicationDbContext dbContext;
-        public NotificationService(ApplicationDbContext dbContext)
+        public NotificationsService(ApplicationDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

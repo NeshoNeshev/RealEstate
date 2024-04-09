@@ -65,7 +65,7 @@ namespace RealEstate.Web.Client.Pages
             {
                 this.NavigationManager.NavigateTo($"property/{inputModel.propertyId}");
             }
-            this.NavigationManager.NavigateTo($"sale/{inputModel.selectedDistrictId}/{inputModel.selectedTypeId}/{inputModel.heating}/{inputModel.furnitureLevel}/{inputModel.selectedTown}/{inputModel.from}/{inputModel.to}");
+            this.NavigationManager.NavigateTo($"sale/{inputModel.selectedDistrictId}/{inputModel.selectedTypeId}/{inputModel.heating}/{inputModel.furnitureLevel}/{inputModel.selectedTown}/{inputModel.from}/{inputModel.to}/{inputModel.Floor}");
             //var response = await Http.PostAsJsonAsync("Administrator/CreateLawFirm", model);
             //if (response.IsSuccessStatusCode)
             //{
