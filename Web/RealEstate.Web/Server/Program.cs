@@ -11,23 +11,19 @@ using RealEstate.Services.Mapping;
 using RealEstate.Web.Shared;
 using System.Reflection;
 using RealEstate.Services;
+using RealEstate.Web.Server;
 
-// �� ��� ������ ������ �� �������
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// ����� �������� ������� �� appsetings.json
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
-// �������� �� asp.net core
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-// ����� �� ��� ����� � ������ ���� ������ ��������  �� ���� �������� ���� IdentityOptionsProvider � ���� � ������� ����� �����
 builder.Services.AddDefaultIdentity<ApplicationUser>(IdentityOptionsProvider.GetIdentityOptions).AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-// ������ �������� ������ � JWT ����� �� �� � ���� ���� ����� ��� �����
 builder.Services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
                 {
@@ -41,26 +37,22 @@ builder.Services.AddIdentityServer()
                 });
 
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove(JwtClaimTypes.Role);
-
-
-// ���������� ��������������
+builder.Services.AddApiAuthorization()
+    .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
 builder.Services.AddAuthentication()
     .AddIdentityServerJwt();
 
-// ���������� ������������
 builder.Services.AddControllersWithViews();
 
-//���������� razor pages
 builder.Services.AddRazorPages();
-
-// ����  �� ������ ������� ����� ����������� 
+ 
 builder.Services.AddTransient<ITownService, TownService>();
 builder.Services.AddTransient<IPropertyService, PropertyService>();
 builder.Services.AddTransient<IPropertyInspectionService, PropertyInspectionService>();
 builder.Services.AddTransient<IDistrictService, DistrictService>();
 builder.Services.AddTransient<IPropertyTypeService, PropertyTypeService>();
 builder.Services.AddTransient<INotificationService, NotificationsService>();
-// ��� �� ������ ����
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -78,23 +70,20 @@ else
 
 using (var serviceScope = app.Services.CreateScope())
 {
-    // ���������� ���� ������
+ 
     AutoMapperConfiguration.RegisterMappings(typeof(ErrorViewModel).GetTypeInfo().Assembly);
     IServiceProvider serviceProvider = serviceScope.ServiceProvider;
-    // ����� �������� ��������� "ApplicationDbContext"
     var dbContext = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    // �������� ����������
     dbContext.Database.Migrate();
-    // ������ ���� � ���� ����������� ����� �� �������� �� asp.net core
     var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-    ApplicationDbInitialiser.SeedTowns(dbContext, serviceProvider);
-    ApplicationDbInitialiser.SeedTipes(dbContext, serviceProvider);
-    // ������ ������� � ������
+    await ApplicationDbInitialiser.SeedTowns(dbContext, serviceProvider);
+    await ApplicationDbInitialiser.SeedDistricts(dbContext, serviceProvider);
+    await ApplicationDbInitialiser.SeedTipes(dbContext, serviceProvider);
     ApplicationDbInitialiser.SeedRoles(roleManager);
     ApplicationDbInitialiser.SeedUsers(userManager);
 }
-// ���� �� ��������
+
 app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
@@ -111,5 +100,4 @@ app.MapRazorPages();
 app.MapControllers();
 app.MapFallbackToFile("index.html");
 
-// �������� ����
 app.Run();
