@@ -18,12 +18,25 @@ namespace RealEstate.Web.Server.Controllers
         private readonly IWebHostEnvironment env;
         private readonly IPropertyService propertyService;
         private readonly INotificationService notificationService;
+        private readonly ITownService townService;
 
-        public AdministrationController(IWebHostEnvironment env, IPropertyService propertyService, INotificationService notificationService)
+        public AdministrationController(IWebHostEnvironment env, IPropertyService propertyService, INotificationService notificationService, ITownService townService)
         {
             this.env = env;
             this.propertyService = propertyService;
             this.notificationService = notificationService;
+            this.townService = townService;
+        }
+        [HttpGet("GetAllProperties")]
+        public async Task<IEnumerable<PropertyViewModel>> GetAllProperties() 
+        {
+            var response = await this.propertyService.GetTopProperties<PropertyViewModel>();
+            foreach (var item in response)
+            {
+                var townName = await this.townService.GetTownByDistrictId(item.DistrictId);
+                item.TownName = townName;
+            }
+            return response;
         }
         [HttpPost("UploadImages")]
         public async Task<List<string>> Post([FromBody] ImageFile[] files)

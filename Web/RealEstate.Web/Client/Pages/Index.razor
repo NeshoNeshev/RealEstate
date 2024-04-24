@@ -37,7 +37,7 @@
                                     <select class="form-select border-0 py-3" @onchange="SelectionChanged" value="@inputModel.selectedTown">
 
                                         <option selected value="">Изберете град</option>
-                                        @foreach (var town in indexModel.Towns)
+                                        @foreach (var town in indexModel.Towns.OrderBy(x=>x.Name))
                                         {
 
                                             <option value="@town.Id">@town.Name</option>

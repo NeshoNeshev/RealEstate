@@ -15,7 +15,7 @@ namespace RealEstate.Services
 
         public Task<PropertyViewModel> Get(string properyId);
         Task<IEnumerable<T>> GetTopProperties<T>(int? count = null);
-
+        public Task UpdateById(PropertyUpdateModalModel model);
         public Task Update (PropertyUpdateModel model);
         Task<IEnumerable<T>> GetAll<T>(string distinctId);
         Task<IEnumerable<T>> GetAll<T>();

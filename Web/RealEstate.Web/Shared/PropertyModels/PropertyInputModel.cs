@@ -5,7 +5,7 @@ namespace RealEstate.Web.Shared.PropertyModels
 {
     public class PropertyInputModel
     {
-  
+       
         public double Price { get; set; }
 
     

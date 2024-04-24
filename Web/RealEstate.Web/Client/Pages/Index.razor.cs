@@ -14,10 +14,10 @@ namespace RealEstate.Web.Client.Pages
 {
     partial class Index
     {
-        private IndexInputModel  inputModel= new IndexInputModel();
+        private IndexInputModel inputModel = new IndexInputModel();
         private IndexViewModel? indexModel;
         private List<DistrictViewModel> districts = new List<DistrictViewModel>();
-        private List<string>? heatings = new List<string>() {"ТЕЦ","Газ","Друго" };
+        private List<string>? heatings = new List<string>() { "ТЕЦ", "Газ", "Друго" };
         private List<string>? furnitureLevel = new List<string>() { "Обзаведен", "Необзаведен", "До ключ" };
 
         private string selectedTown = "";
@@ -26,9 +26,7 @@ namespace RealEstate.Web.Client.Pages
             Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI.NoAuthenticationClient");
             try
             {
-
                 indexModel = await Http.GetFromJsonAsync<IndexViewModel>("Index");
-
             }
             catch (AccessTokenNotAvailableException exception)
             {
@@ -36,12 +34,12 @@ namespace RealEstate.Web.Client.Pages
             }
             await base.OnInitializedAsync();
         }
-       
+
         private void SelectionChanged(ChangeEventArgs e)
         {
             selectedTown = e.Value.ToString();
             inputModel.selectedTown = selectedTown;
-            
+
             LoadDistricts(selectedTown);
             // You can add any additional logic here upon selection change
         }
@@ -51,12 +49,11 @@ namespace RealEstate.Web.Client.Pages
             var selectedTown = indexModel.Towns.FirstOrDefault(town => town.Id == townId);
             if (selectedTown != null)
             {
-               
-                districts = selectedTown.Districts.ToList();
+                districts = selectedTown.Districts.OrderBy(x=>x.Name).ToList();
             }
             else
             {
-                districts.Clear(); // Clear districts if no town is selected
+                districts.Clear();
             }
         }
         private async Task OnSubmit()
@@ -66,13 +63,6 @@ namespace RealEstate.Web.Client.Pages
                 this.NavigationManager.NavigateTo($"property/{inputModel.propertyId}");
             }
             this.NavigationManager.NavigateTo($"sale/{inputModel.selectedDistrictId}/{inputModel.selectedTypeId}/{inputModel.heating}/{inputModel.furnitureLevel}/{inputModel.selectedTown}/{inputModel.from}/{inputModel.to}/{inputModel.Floor}");
-            //var response = await Http.PostAsJsonAsync("Administrator/CreateLawFirm", model);
-            //if (response.IsSuccessStatusCode)
-            //{
-            //    Lawfirm = model.Name;
-            //    success = true;
-            //    StateHasChanged();
-            //}
         }
     }
 }

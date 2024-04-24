@@ -1,7 +1,8 @@
 ﻿@page "/administration"
 @using Microsoft.AspNetCore.Authorization
+@using RealEstate.Web.Shared.PropertyModels
 
-<AuthorizeView Roles="Administrator">
+<AuthorizeView Roles="Administrator" Context="NewTab">
     <Authorized>
         <div class="container-xxl bg-white p-0">
             <div class="row g-2">
@@ -39,10 +40,36 @@
 
                             </div>
                         </div>
+                        <div class="row">
+                        </div>
                     }
                 </div>
             </div>
             <div class="row" style="margin-bottom: 20px;">
+                @if (properties ==  null)
+                {
+                    <RealEstate.Web.Client.Components.Spiner></RealEstate.Web.Client.Components.Spiner>
+                }else
+                {
+                        <Grid TItem="PropertyViewModel" class="table table-hover table-bordered table-striped" DataProvider="EmployeesDataProvider" AllowFiltering="true" Responsive="true" ItemsPerPageText="10" AllowPaging="true"  PageSize="20" AllowSorting="true">
+    <GridColumn TItem="PropertyViewModel" HeaderText="Id" PropertyName="Id" SortKeySelector="item => item.Id">
+        @context.Id
+    </GridColumn>
+    <GridColumn TItem="PropertyViewModel" HeaderText="Град" PropertyName="TownName" StringComparison="StringComparison.Ordinal" SortKeySelector="item => item.TownName">
+        @context.TownName
+    </GridColumn>
+    <GridColumn TItem="PropertyViewModel" HeaderText="Квартал" PropertyName="DistrictName" SortKeySelector="item => item.DistrictName">
+        @context.DistrictName
+    </GridColumn>
+     <GridColumn TItem="PropertyViewModel" HeaderText="Тип" PropertyName="PropertyTypeName" SortKeySelector="item => item.PropertyTypeName">
+        @context.PropertyTypeName
+    </GridColumn>
+    <GridColumn TItem="PropertyViewModel" HeaderText="Цена" PropertyName="Price" SortKeySelector="item => item.Price">
+        @context.Price
+    </GridColumn>
+  
+</Grid>
+                }
             </div>
         </div>
 
@@ -61,6 +88,7 @@
 
 
 @code {
+
 
     private void ShowMessage(ToastType toastType)
     {

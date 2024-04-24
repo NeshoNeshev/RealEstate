@@ -48,6 +48,12 @@ namespace RealEstate.Web.Server.Controllers
 
             
         }
+        [HttpPut("UpdateById")]
+        public async Task UpdateById(PropertyUpdateModalModel model)
+        { 
+           await this.propertyService.UpdateById(model);
+        }
+        
         [HttpGet("AllProperties")]
         public async Task<IEnumerable<PropertyViewModel>> AllProperties()
         {

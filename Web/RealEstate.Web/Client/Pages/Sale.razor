@@ -35,7 +35,7 @@
                                 <select class="form-select border-0 py-3" @bind="@inputModel.selectedDistrictId">
                                     <ValidationMessage For="@(() => inputModel.selectedDistrictId)" />
                                     <option selected>Изберете квартал</option>
-                                    @foreach (var district in districts)
+                                    @foreach (var district in districts.OrderBy(x=>x.Name))
                                     {
                                         <option value="@district.Id">@district.Name</option>
                                     }
@@ -161,10 +161,10 @@
 
     protected override async Task OnInitializedAsync()
     {
-        
         Http = ClientFactory.CreateClient("RealEstate.Web.ServerAPI.NoAuthenticationClient");
         try
         {
+     
             indexModel = await Http.GetFromJsonAsync<IndexViewModel>("Index");
             inputModel.selectedDistrictId = selectedDistrictId;
             inputModel.from = from;
@@ -176,7 +176,7 @@
             selectedTowns = selectedTown;
             inputModel.Floor = int.Parse(floor);
             LoadDistricts(selectedTown);
-            var response = await Http.PostAsJsonAsync<IndexInputModel>("Property/SearchProperties", inputModel);
+            var response = await Http.PostAsJsonAsync<IndexInputModel>($"Property/SearchProperties", inputModel);
             if (response.IsSuccessStatusCode)
             {
                 var res = await response.Content.ReadFromJsonAsync<IEnumerable<PropertyViewModel>>();

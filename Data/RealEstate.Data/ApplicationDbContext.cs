@@ -9,7 +9,6 @@ using System.Reflection;
 
 namespace RealEstate.Data
 {
-    //основен клас който отговаря за базата данни
     public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>
     {
         private static readonly MethodInfo SetIsDeletedQueryFilterMethod =
